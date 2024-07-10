@@ -32,4 +32,11 @@ String.prototype.at = function (index: number) {
   return this[newIndex];
 };
 
-export default { String };
+String.prototype.charAt = function (index: number = 0) {
+  //1) if there is no arg, return first index of string
+  //2) if index is bigger than legnth -1 of string, return empty string
+
+  if (index < 0 || index >= this.length) return "";
+
+  return this[index] ?? "";
+};

@@ -3,7 +3,7 @@
 1. String
 
 1) String.prototype.at()
-2) String.prototype.chartAt()
+2) String.prototype.charAt()
 3) String.prototype.charCodeAt()
 4) String.prototype.concat()
 5) String.prototype.endsWith()
