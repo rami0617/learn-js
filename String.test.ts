@@ -132,3 +132,16 @@ describe("7. String.prototype.indexOf", () => {
     expect(string.indexOf("Blue", -1)).toEqual(0);
   });
 });
+
+describe("8. String.prototype.lastIndexOf", () => {
+  const string = "hello";
+
+  test("1) if serach string include string, return index of string.", () => {
+    expect(string.lastIndexOf("l")).toEqual(3);
+    expect(string.lastIndexOf("x")).toEqual(-1);
+  });
+
+  test("2)if fromIndex is negative number, the original string is searched.", () => {
+    expect(string.lastIndexOf("hello", -1)).toEqual(0);
+  });
+});

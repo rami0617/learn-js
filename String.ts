@@ -128,3 +128,31 @@ String.prototype.indexOf = function (searchString: string, fromIndex?: number) {
   //4) if fromIndex is bigger than length of string, return -1.
   //5) if serach string include string, return index of string
 };
+
+String.prototype.lastIndexOf = function (
+  searchString: string,
+  fromIndex?: number
+) {
+  //1) basic action is same indexOf.
+  //2) difference is that search start is last string.
+
+  let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
+
+  if (fromIndex !== undefined) {
+    if (fromIndex >= this.length) {
+      return -1;
+    }
+
+    if (fromIndex < 0) {
+      newFromIndex = 0;
+    }
+  }
+
+  for (let i = this.length; i >= 0; i++) {
+    if (this[i] === searchString) {
+      return i;
+    }
+  }
+
+  return -1;
+};
