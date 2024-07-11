@@ -40,3 +40,29 @@ String.prototype.charAt = function (index: number = 0) {
 
   return this[index] ?? "";
 };
+
+String.prototype.charCodeAt = function (index: number = 0) {
+  //1) return the unicode of the string corresponding to the index of the character.
+  //2) if index is undefined, we think of index is zero.
+  //3) if there is index, return he string corresponding to the index of the character.
+  //4) if index is not between 0 and string.length -1, return NaN.
+  //4) we use unicode that String.prototype.codePointAt()
+
+  if (index < 0 || index > this.length - 1) return NaN;
+
+  return this.codePointAt(index);
+};
+
+String.prototype.concat = function (...strings: string[]) {
+  //1) the length of strings must be at least one.
+  //2) there is no arg, return originally string.
+  //3) there is args, return originally string plus all args
+  if (!strings) return this;
+
+  let result = this;
+  for (let i = 0; i < strings.length; i++) {
+    result += this;
+  }
+
+  return result;
+};

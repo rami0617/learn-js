@@ -45,3 +45,39 @@ describe("2. String.prototype.charAt", () => {
     expect(string.charAt(-1)).toEqual("");
   });
 });
+
+describe("3. String.prototype.charCodeAt", () => {
+  const string = "world";
+
+  test("1) if index is undefined, we think of index is zero.", () => {
+    expect(string.charCodeAt(undefined)).toEqual(string.codePointAt(0));
+  });
+
+  test("2) if index is not between 0 and string.length -1, return NaN", () => {
+    expect(string.charCodeAt(string.length)).toBeNaN();
+    expect(string.charCodeAt(-1)).toBeNaN();
+  });
+
+  test("3) if there is index, return he string corresponding to the index of the character.", () => {
+    expect(string.charCodeAt(0)).toEqual(string.codePointAt(0));
+    expect(string.charCodeAt(1)).toEqual(string.codePointAt(1));
+    expect(string.charCodeAt(2)).toEqual(string.codePointAt(2));
+  });
+});
+
+describe("4. String.prototype.concat", () => {
+  const string = "world";
+
+  test("1) there is no arg, return originally string.", () => {
+    expect(string.concat()).toEqual(string);
+  });
+
+  test("2) there is args, return originally string plus all args.", () => {
+    const anotherString = ["", "!"];
+
+    expect(string.concat(...anotherString)).toEqual(
+      string + anotherString[0] + anotherString[1]
+    );
+    expect(string.concat("hello")).toEqual(string + "hello");
+  });
+});
