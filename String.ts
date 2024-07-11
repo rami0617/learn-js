@@ -156,3 +156,45 @@ String.prototype.lastIndexOf = function (
 
   return -1;
 };
+
+String.prototype.localeCompare = function (compareString: string) {
+  //only english
+
+  if (this === compareString) return 0;
+
+  const alphabet = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+
+  const compareStringIndex = alphabet.indexOf(compareString);
+  const originalStringIndex = alphabet.indexOf(this);
+
+  return compareStringIndex > originalStringIndex
+    ? -1 * Math.abs(compareStringIndex - originalStringIndex)
+    : Math.abs(compareStringIndex - originalStringIndex);
+};

@@ -145,3 +145,17 @@ describe("8. String.prototype.lastIndexOf", () => {
     expect(string.lastIndexOf("hello", -1)).toEqual(0);
   });
 });
+
+describe("9. String.prototype.localeCompare", () => {
+  test("1) if compare string is behind original string, return negative number(distance).", () => {
+    expect("a".localeCompare("c")).toEqual(-1);
+  });
+
+  test("2) if compare string is same original string, return 0.", () => {
+    expect("a".localeCompare("a")).toEqual(0);
+  });
+
+  test("3) if compare string is in front of original string, return positive number(distance).", () => {
+    expect("c".localeCompare("a")).toEqual(1);
+  });
+});
