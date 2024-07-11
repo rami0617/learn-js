@@ -115,3 +115,20 @@ describe("6. String.prototype.includes", () => {
     expect(string.includes(string[1], 3)).toBeFalsy();
   });
 });
+
+describe("7. String.prototype.indexOf", () => {
+  const string = "Blue Whale";
+
+  test("1) if serach string include string, return index of string.", () => {
+    expect(string.indexOf("Blue")).toEqual(0);
+    expect(string.indexOf("Blute")).toEqual(-1);
+  });
+
+  test("2) fromIndex is bigger than length of string, return -1.", () => {
+    expect(string.indexOf("Blue", 20)).toEqual(-1);
+  });
+
+  test("3)if fromIndex is negative number, the original string is searched.", () => {
+    expect(string.indexOf("Blue", -1)).toEqual(0);
+  });
+});

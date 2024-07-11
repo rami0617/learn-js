@@ -97,5 +97,34 @@ String.prototype.includes = function (searchString: string, position?: number) {
       return true;
     }
   }
+
   return false;
+};
+
+String.prototype.indexOf = function (searchString: string, fromIndex?: number) {
+  //1) if serachString is empty, we consider searchString is undefined.
+  //2) if there is searchString and there is no from index, the original string is searched.
+
+  let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
+
+  if (fromIndex !== undefined) {
+    if (fromIndex >= this.length) {
+      return -1;
+    }
+
+    if (fromIndex < 0) {
+      newFromIndex = 0;
+    }
+  }
+
+  for (let i = newFromIndex; i < this.length; i++) {
+    if (this[i] === searchString) {
+      return i;
+    }
+  }
+
+  return -1;
+  //3) if fromIndex is negative number, the original string is searched.
+  //4) if fromIndex is bigger than length of string, return -1.
+  //5) if serach string include string, return index of string
 };
