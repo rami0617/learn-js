@@ -76,3 +76,21 @@ describe("3. String.prototype.charCodeAt", () => {
     expect("".concat(null)).toEqual("null");
   });
 });
+
+describe("4. String.prototype.endsWith", () => {
+  const string = "world";
+
+  test("1) if string have searchString, return true.", () => {
+    expect(string.endsWith(string[string.length - 1])).toBeTruthy();
+  });
+
+  test("2) if string have not searchString, return false.", () => {
+    expect(string.endsWith(string[0])).toBeFalsy();
+  });
+
+  test("3)if length is between 0 and length -1, we consider the string to be sliced by the length of the string.", () => {
+    expect(string.endsWith(string[2], 3)).toBeTruthy();
+    expect(string.endsWith(string[1], 2)).toBeTruthy();
+    expect(string.endsWith(string[2], 2)).toBeFalsy();
+  });
+});

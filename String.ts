@@ -66,3 +66,18 @@ String.prototype.concat = function (...strings: string[]) {
 
   return result;
 };
+
+String.prototype.endsWith = function (searchString: string, length?: number) {
+  //1) if string have searchString, return true.
+  //2) if string have not searchString, return false.
+  //3) originally value of length is length of string.
+  //4) if length is between 0 and length -1, we consider the string to be sliced by the length of the string.
+
+  if (length === this.length || undefined === length) {
+    return this[this.length - 1] === searchString;
+  }
+
+  const newString = this.slice(0, length);
+
+  return newString[newString.length - 1] === searchString;
+};
