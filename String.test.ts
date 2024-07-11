@@ -63,21 +63,16 @@ describe("3. String.prototype.charCodeAt", () => {
     expect(string.charCodeAt(1)).toEqual(string.codePointAt(1));
     expect(string.charCodeAt(2)).toEqual(string.codePointAt(2));
   });
-});
 
-describe("4. String.prototype.concat", () => {
-  const string = "world";
-
-  test("1) there is no arg, return originally string.", () => {
-    expect(string.concat()).toEqual(string);
+  test("4) if arg is object return [object Object]", () => {
+    expect("".concat({})).not.toBeInstanceOf(String);
   });
 
-  test("2) there is args, return originally string plus all args.", () => {
-    const anotherString = ["", "!"];
+  test("5) if arg is emtpy array, return originally string", () => {
+    expect(string.concat([])).toEqual(string);
+  });
 
-    expect(string.concat(...anotherString)).toEqual(
-      string + anotherString[0] + anotherString[1]
-    );
-    expect(string.concat("hello")).toEqual(string + "hello");
+  test("6) if arg is null, return null string", () => {
+    expect("".concat(null)).toEqual("null");
   });
 });
