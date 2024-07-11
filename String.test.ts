@@ -63,21 +63,25 @@ describe("3. String.prototype.charCodeAt", () => {
     expect(string.charCodeAt(1)).toEqual(string.codePointAt(1));
     expect(string.charCodeAt(2)).toEqual(string.codePointAt(2));
   });
+});
 
-  test("4) if arg is object return [object Object]", () => {
+describe("4. String.prototype.concat", () => {
+  const string = "world";
+
+  test("1) if arg is object return [object Object]", () => {
     expect("".concat({})).not.toBeInstanceOf(String);
   });
 
-  test("5) if arg is emtpy array, return originally string", () => {
+  test("2) if arg is emtpy array, return originally string", () => {
     expect(string.concat([])).toEqual(string);
   });
 
-  test("6) if arg is null, return null string", () => {
-    expect("".concat(null)).toEqual("null");
+  test("3) there is args, return originally string plus all args.", () => {
+    expect(string.concat("hello", "!")).toEqual(string + "hello" + "!");
   });
 });
 
-describe("4. String.prototype.endsWith", () => {
+describe("5. String.prototype.endsWith", () => {
   const string = "world";
 
   test("1) if string have searchString, return true.", () => {
@@ -92,5 +96,22 @@ describe("4. String.prototype.endsWith", () => {
     expect(string.endsWith(string[2], 3)).toBeTruthy();
     expect(string.endsWith(string[1], 2)).toBeTruthy();
     expect(string.endsWith(string[2], 2)).toBeFalsy();
+  });
+});
+
+describe("6. String.prototype.includes", () => {
+  const string = "hello";
+
+  test("1) if there is searchString in string return true.", () => {
+    expect(string.includes(string[2])).toBeTruthy();
+  });
+
+  test("2) if there is no searchString in string return false.", () => {
+    expect(string.includes("a")).toBeFalsy();
+  });
+
+  test("3) if there is position, start searching from position of string.", () => {
+    expect(string.includes(string[2], 3)).toBeTruthy();
+    expect(string.includes(string[1], 3)).toBeFalsy();
   });
 });

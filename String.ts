@@ -81,3 +81,21 @@ String.prototype.endsWith = function (searchString: string, length?: number) {
 
   return newString[newString.length - 1] === searchString;
 };
+
+String.prototype.includes = function (searchString: string, position?: number) {
+  //1) if there is searchString in string return true.
+  //2) if there is no searchString in string return false.
+  //3) if there is position, start searching from position of string.
+
+  const newString = this.slice(
+    position === undefined ? 0 : position,
+    this.length
+  );
+
+  for (let i = 0; i < newString.length; i++) {
+    if (newString[i] === searchString) {
+      return true;
+    }
+  }
+  return false;
+};
