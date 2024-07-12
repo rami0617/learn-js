@@ -186,3 +186,22 @@ describe("10. String.prototype.match", () => {
     );
   });
 });
+
+describe("11. String.prototype.padEnd", () => {
+  const string = "hello";
+
+  test("1) if length of originally string bigger than targetLength, return originally string.", () => {
+    expect(string.padEnd(1)).toEqual(string);
+    expect(string.padEnd(2)).toEqual(string);
+  });
+
+  test("2) if there is no fillString, fill empty string until target length.", () => {
+    expect(string.padEnd(6)).toEqual(string + " ");
+    expect(string.padEnd(7)).toEqual(string + " ".repeat(2));
+  });
+
+  test("3) if there is fillString, fill fillString until target length.", () => {
+    expect(string.padEnd(6, "!")).toEqual(string + "!");
+    expect(string.padEnd(7, "!")).toEqual(string + "!".repeat(2));
+  });
+});
