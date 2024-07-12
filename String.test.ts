@@ -159,3 +159,30 @@ describe("9. String.prototype.localeCompare", () => {
     expect("c".localeCompare("a")).toEqual(1);
   });
 });
+
+describe("10. String.prototype.match", () => {
+  const string = "hello";
+
+  test("1) if regExp is undefined, return [''].", () => {
+    const result = string.match();
+
+    expect(JSON.parse(JSON.stringify(result))).toEqual([""]);
+  });
+
+  test("2) if string same regexp, reurn first string in array", () => {
+    const reuslt = string.match(/h/g);
+
+    expect(JSON.parse(JSON.stringify(reuslt))).toEqual(
+      JSON.parse(JSON.stringify(["h"]))
+    );
+  });
+
+  test("3) if regExp is not includes g flag, return same result RegExp.exec.", () => {
+    const result = string.match("h");
+    const execResult = RegExp("h").exec(string);
+
+    expect(JSON.parse(JSON.stringify(result))).toEqual(
+      JSON.parse(JSON.stringify(execResult))
+    );
+  });
+});

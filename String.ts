@@ -198,3 +198,29 @@ String.prototype.localeCompare = function (compareString: string) {
     ? -1 * Math.abs(compareStringIndex - originalStringIndex)
     : Math.abs(compareStringIndex - originalStringIndex);
 };
+
+String.prototype.match = function (regExp: RegExp): RegExpMatchArray | null {
+  //1) if regExp is undefined, return [""]
+
+  if (regExp === undefined) return [""];
+  //2) g flag means global.
+
+  const global = regExp.global;
+
+  let match: RegExpMatchArray | null = [];
+  let array: RegExpMatchArray | null = [];
+
+  if (global) {
+    while ((array = regExp.exec(this)) !== null) {
+      //3) if string same regexp, reurn first string in array
+      match.push(array[0]);
+    }
+
+    return match.length ? match : null;
+  } else {
+    //4) if regExp is not includes g flag, return same result RegExp.exec.
+    match = regExp.exec(this);
+
+    return match ? match : null;
+  }
+};
