@@ -334,3 +334,14 @@ String.prototype.replace = function (
     return result;
   }
 };
+
+String.prototype.replaceAll = function (
+  pattern: string | RegExp,
+  replacement: string
+) {
+  if (typeof pattern === "string") {
+    return this.split(pattern).join(replacement);
+  } else {
+    return this.replace(pattern, replacement);
+  }
+};

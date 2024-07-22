@@ -259,3 +259,12 @@ describe("14. String.prototype.replace", () => {
     expect(string.replace(/w/i, "~")).toBe("hello, ~orld");
   });
 });
+
+describe("15. String.prototype.replaceAll", () => {
+  const string = "hello, world";
+
+  test("1) find all pattern, change replacement", () => {
+    expect(string.replaceAll("o", "!")).toBe("hell!, w!rld");
+    expect(string.replaceAll(/o/g, "!")).toBe("hell!, w!rld");
+  });
+});
