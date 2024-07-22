@@ -296,3 +296,41 @@ String.prototype.repeat = function (count: number) {
 
   return newString;
 };
+
+String.prototype.replace = function (
+  pattern: string | RegExp,
+  replacement: string
+) {
+  //not include replacer function.
+
+  //1) if pattern is empty string, return replacement + string
+  if (pattern === "") return replacement + this;
+
+  //2) find pattern, change replacement.
+
+  if (typeof pattern === "string") {
+    const index = this.indexOf(pattern);
+
+    if (index === -1) return this;
+
+    const beforeString = this.slice(0, index);
+    const afterString = this.slice(index + pattern.length);
+
+    return beforeString + replacement + afterString;
+  } else {
+    let match: RegExpExecArray | null;
+    let lastIndex = 0;
+    let result = "";
+
+    while ((match = pattern.exec(this)) !== null) {
+      result += this.slice(lastIndex, match.length) + replacement;
+      lastIndex = match.index + match[0].length;
+
+      if (!pattern.global) break;
+    }
+
+    result += this.slice(lastIndex);
+
+    return result;
+  }
+};

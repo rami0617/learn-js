@@ -243,3 +243,19 @@ describe("13. String.prototype.repeat", () => {
     expect(string.repeat(3)).toEqual(string + string + string);
   });
 });
+
+describe("14. String.prototype.replace", () => {
+  const string = "hello, world";
+
+  test("1) if pattern is empty string, return replacement + string", () => {
+    expect(string.replace("", "~")).toBe("~" + string);
+  });
+
+  test("2) if pattern is string, return pattern change replacement", () => {
+    expect(string.replace("world", "~")).toBe("hello, ~");
+  });
+
+  test("3) if pattern is regexp, return pattern change replacement", () => {
+    expect(string.replace(/w/i, "~")).toBe("hello, ~orld");
+  });
+});
