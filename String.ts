@@ -345,3 +345,10 @@ String.prototype.replaceAll = function (
     return this.replace(pattern, replacement);
   }
 };
+
+String.prototype.search = function (regexp: RegExp) {
+  //1) find regexp, return index
+  //2) if don't find regex, return -1
+  //3) actual implementation comes from RegExp.prototype[@@search]().
+  return regexp[Symbol.search](this);
+};

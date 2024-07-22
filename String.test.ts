@@ -268,3 +268,17 @@ describe("15. String.prototype.replaceAll", () => {
     expect(string.replaceAll(/o/g, "!")).toBe("hell!, w!rld");
   });
 });
+
+describe("16. String.prototype.search", () => {
+  const string = "hello, world";
+
+  test("1) find regexp, return index.", () => {
+    expect(string.search(/o/i)).toBe(4);
+    expect(string.search(/h/i)).toBe(0);
+  });
+
+  test("2) if don't find regex, return -1.", () => {
+    expect(string.search(/!/i)).toBe(-1);
+    expect(string.search(/n/i)).toBe(-1);
+  });
+});
