@@ -226,3 +226,20 @@ describe("12. String.prototype.padStart", () => {
     expect(string.padStart(7, "!")).toEqual("!".repeat(2) + string);
   });
 });
+
+describe("13. String.prototype.repeat", () => {
+  const string = "hello";
+
+  test("1) if count is negative number or Infinity, return range error.", () => {
+    expect(() => string.repeat(-1)).toThrow(RangeError);
+    expect(() => string.repeat(1 / 0)).toThrow("Invalid count value: Infinity");
+  });
+
+  test("2) count change integer.", () => {
+    expect(string.repeat(2.1)).toEqual(string.repeat(2));
+  });
+
+  test("3) repeat the string the number of times.", () => {
+    expect(string.repeat(3)).toEqual(string + string + string);
+  });
+});

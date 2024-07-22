@@ -271,3 +271,28 @@ String.prototype.padStart = function (
 
   return newString + this;
 };
+
+String.prototype.repeat = function (count: number) {
+  //1) if count is negative number, return range error.
+  if (count < 0) {
+    throw new RangeError(`RangeError: Invalid count value: ${count}`);
+  }
+
+  //2) if count is Infinity, return range error.
+  if (count === Infinity) {
+    throw new RangeError("Invalid count value: Infinity");
+  }
+
+  //3) count change integer.
+  let newCount = Math.floor(count);
+
+  //4) repeat and return string.
+  let newString = this;
+
+  while (newCount !== 0) {
+    newString += this;
+    newCount--;
+  }
+
+  return newString;
+};
