@@ -352,3 +352,43 @@ String.prototype.search = function (regexp: RegExp) {
   //3) actual implementation comes from RegExp.prototype[@@search]().
   return regexp[Symbol.search](this);
 };
+
+String.prototype.slice = function (indexStart: number, indexEnd?: number) {
+  //1) if indexStart bigger or same than length of string, return empty string
+
+  if (indexStart >= this.length) return "";
+
+  //2) if indexStart samller than 0, count last index of string.
+
+  let newIndexStart = indexStart;
+  let newIndexEnd = indexEnd ?? this.length;
+
+  if (indexStart < 0) {
+    newIndexStart = this.length + indexStart;
+    if (newIndexStart < 0) {
+      newIndexStart = 0;
+    }
+  }
+
+  if (indexEnd !== undefined && indexEnd < 0) {
+    newIndexEnd = this.length + indexEnd;
+
+    if (newIndexEnd < 0) {
+      newIndexEnd = 0;
+    }
+  }
+
+  if (newIndexEnd <= newIndexStart) return "";
+
+  if (newIndexEnd > this.length) {
+    newIndexEnd = this.length;
+  }
+
+  let result = "";
+
+  for (let i = newIndexStart; i < newIndexEnd; i++) {
+    result += this[i];
+  }
+
+  return result;
+};

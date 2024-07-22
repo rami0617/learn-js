@@ -282,3 +282,30 @@ describe("16. String.prototype.search", () => {
     expect(string.search(/n/i)).toBe(-1);
   });
 });
+
+describe("17. String.prototype.slice", () => {
+  const string = "hello, world";
+
+  test("1) slice string.", () => {
+    expect(string.slice(0, 1)).toBe("h");
+    expect(string.slice(1, 4)).toBe("ell");
+  });
+
+  test("2) if indexStart is negative number, count last index.", () => {
+    expect(string.slice(-1)).toBe("d");
+    expect(string.slice(-2)).toBe("ld");
+  });
+
+  test("3) if indexStart is bigger than length of string, return empty string.", () => {
+    expect(string.slice(20)).toBe("");
+  });
+
+  test("4) if indexEnd is negative number, count last index.", () => {
+    expect(string.slice(0, -1)).toBe("hello, worl");
+    expect(string.slice(2, -1)).toBe("llo, worl");
+  });
+
+  test("5) if indexEnd is bigger than length of string, count length of string.", () => {
+    expect(string.slice(0, 20)).toBe("hello, world");
+  });
+});
