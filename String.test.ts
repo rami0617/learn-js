@@ -189,6 +189,7 @@ describe("10. String.prototype.match", () => {
 
 describe("11. String.prototype.padEnd", () => {
   const string = "hello";
+  const defaultFillString = " ";
 
   test("1) if length of originally string bigger than targetLength, return originally string.", () => {
     expect(string.padEnd(1)).toEqual(string);
@@ -196,12 +197,32 @@ describe("11. String.prototype.padEnd", () => {
   });
 
   test("2) if there is no fillString, fill empty string until target length.", () => {
-    expect(string.padEnd(6)).toEqual(string + " ");
-    expect(string.padEnd(7)).toEqual(string + " ".repeat(2));
+    expect(string.padEnd(6)).toEqual(string + defaultFillString);
+    expect(string.padEnd(7)).toEqual(string + defaultFillString.repeat(2));
   });
 
   test("3) if there is fillString, fill fillString until target length.", () => {
     expect(string.padEnd(6, "!")).toEqual(string + "!");
     expect(string.padEnd(7, "!")).toEqual(string + "!".repeat(2));
+  });
+});
+
+describe("12. String.prototype.padStart", () => {
+  const string = "hello";
+  const defaultFillString = " ";
+
+  test("1) if length of originally string bigger than targetLength, return originally string.", () => {
+    expect(string.padStart(1)).toEqual(string);
+    expect(string.padStart(2)).toEqual(string);
+  });
+
+  test("2) if there is no fillString, fill empty string until target length.", () => {
+    expect(string.padStart(6)).toEqual(defaultFillString + string);
+    expect(string.padStart(7)).toEqual(defaultFillString.repeat(2) + string);
+  });
+
+  test("3) if there is fillString, fill fillString until target length.", () => {
+    expect(string.padStart(6, "!")).toEqual("!" + string);
+    expect(string.padStart(7, "!")).toEqual("!".repeat(2) + string);
   });
 });

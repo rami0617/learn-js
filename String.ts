@@ -245,3 +245,29 @@ String.prototype.padEnd = function (targetLength: number, fillString?: string) {
 
   return newString;
 };
+
+String.prototype.padStart = function (
+  targetLength: number,
+  fillString?: string
+) {
+  //1) if length of originally string bigger than targetLength, return originally string.
+
+  if (targetLength <= this.length) {
+    return this;
+  }
+
+  //2) if there is no fillString, fill empty string until target length.
+
+  //3) if there is fillString, fill fillString until target length.
+
+  let newLength = targetLength - this.length;
+  let newString = "";
+  let character = fillString === undefined ? " " : fillString;
+
+  while (newLength !== 0) {
+    newString += character;
+    newLength--;
+  }
+
+  return newString + this;
+};
