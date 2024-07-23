@@ -394,6 +394,7 @@ String.prototype.slice = function (indexStart: number, indexEnd?: number) {
 };
 
 String.prototype.split = function (separator?: string, limit?: number) {
+  //Not include Regexp
   //separate string, limit number
 
   //'abcd'.split() -> ['abcd']
@@ -442,4 +443,15 @@ String.prototype.split = function (separator?: string, limit?: number) {
 
     return limit !== undefined ? result.slice(0, limit) : result;
   }
+};
+
+String.prototype.startsWith = function (
+  searchString: string,
+  position?: number
+) {
+  //searchString으로시작하면 true, 아니면 false
+  const newString = this.slice(position === undefined ? 0 : position);
+  const index = newString.indexOf(searchString);
+
+  return index === 0;
 };

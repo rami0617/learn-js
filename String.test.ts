@@ -332,3 +332,23 @@ describe("18. String.prototype.split", () => {
     expect(string.split("o", 1)).toStrictEqual(["hell"]);
   });
 });
+
+describe("19. String.prototype.startsWith", () => {
+  const string = "hello, world";
+
+  test("1) if string have searchString, return true.", () => {
+    expect(string.startsWith("h")).toBeTruthy();
+  });
+
+  test("2) if string don't have searchString, return false.", () => {
+    expect(string.startsWith("e")).toBeFalsy();
+  });
+
+  test("3) if string have searchString where range up to the position of the string, return true.", () => {
+    expect(string.startsWith("l", 2)).toBeTruthy();
+  });
+
+  test("4) if string don't have searchString where range up to the position of the string, return false.", () => {
+    expect(string.startsWith("e", 3)).toBeFalsy();
+  });
+});
