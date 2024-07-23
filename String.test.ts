@@ -392,3 +392,9 @@ describe("23. String.prototype.trim", () => {
     expect(string.trim()).toBe("HELLO, WORLD");
   });
 });
+
+describe("24. String.prototype.valueOf", () => {
+  test("1) return the raw value of a String object.", () => {
+    expect(new String(1111).valueOf()).toBe("1111");
+  });
+});

@@ -558,3 +558,7 @@ String.prototype.trim = function () {
 
   return result;
 };
+
+String.prototype.valueOf = function () {
+  return this.toString();
+};
