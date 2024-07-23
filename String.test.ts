@@ -376,3 +376,19 @@ describe("21. String.prototype.toLowerCase", () => {
     expect(string.toLowerCase()).toBe("hello, world");
   });
 });
+
+describe("22. String.prototype.toLowerCase", () => {
+  const number = 123;
+
+  test("1) converts a number to string.", () => {
+    expect(number.toString()).toBe("123");
+  });
+});
+
+describe("23. String.prototype.trim", () => {
+  const string = "          HELLO, WORLD        ";
+
+  test("1) remove start and end empty string.", () => {
+    expect(string.trim()).toBe("HELLO, WORLD");
+  });
+});

@@ -524,6 +524,37 @@ String.prototype.toLowerCase = function () {
   return result;
 };
 
-String.prototype.toString = () => {
-  //
+String.prototype.toString = function () {
+  return new String(this).valueOf();
+};
+
+String.prototype.trim = function () {
+  let result = "";
+  //'   Hello   world!   ' -> 'Hello   world!'
+  //앞, 뒤 공백을 모두 제거함
+
+  let index = 0;
+
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] !== " ") {
+      index = i;
+      break;
+    }
+  }
+
+  result = this.slice(index);
+
+  if (result[result.length - 1] === " ") {
+    for (let i = result.length; i >= 0; i--) {
+      //0번째 인덱스까지 검색.
+      if (result[i] !== " ") {
+        index = i;
+        break;
+      }
+    }
+
+    result = result.slice(0, index + 1);
+  }
+
+  return result;
 };
