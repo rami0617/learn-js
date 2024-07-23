@@ -368,3 +368,11 @@ describe("20. String.prototype.substring", () => {
     expect(string.substring(3, -2)).toBe(string.slice(0, 3));
   });
 });
+
+describe("21. String.prototype.toLowerCase", () => {
+  const string = "HELLO, WORLD";
+
+  test("1) converts a string to lowercase.", () => {
+    expect(string.toLowerCase()).toBe("hello, world");
+  });
+});
