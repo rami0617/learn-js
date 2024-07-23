@@ -352,3 +352,19 @@ describe("19. String.prototype.startsWith", () => {
     expect(string.startsWith("e", 3)).toBeFalsy();
   });
 });
+
+describe("20. String.prototype.substring", () => {
+  const string = "hello, world";
+
+  test("1) if indexStart and indexEnd are the same, return empty string.", () => {
+    expect(string.substring(1, 1)).toBe("");
+  });
+
+  test("2) if indexStart is negative number, treated as 0.", () => {
+    expect(string.substring(-1)).toBe(string);
+  });
+
+  test("3) if indexEnd is negative number, treated as 0 and if indexStart bigger than indexEnd, swap indexStart and indexEnd.", () => {
+    expect(string.substring(3, -2)).toBe(string.slice(0, 3));
+  });
+});

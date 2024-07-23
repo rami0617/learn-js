@@ -455,3 +455,32 @@ String.prototype.startsWith = function (
 
   return index === 0;
 };
+
+String.prototype.substring = function (indexStart: number, indexEnd?: number) {
+  //endStart not include
+
+  if (indexStart == indexEnd) {
+    return "";
+  }
+
+  let newIndexStart = indexStart;
+
+  let newIndexEnd = indexEnd === undefined ? this.length : indexEnd;
+
+  if (indexStart < 0 || isNaN(indexStart)) {
+    newIndexStart = 0;
+  }
+
+  if (indexEnd !== undefined && (indexEnd < 0 || isNaN(indexEnd))) {
+    newIndexEnd = 0;
+  }
+
+  if (newIndexStart > newIndexEnd) {
+    [newIndexStart, newIndexEnd] = [newIndexEnd, newIndexStart];
+    // let temp = newIndexStart;
+    // newIndexStart = newIndexEnd;
+    // newIndexEnd = temp;
+  }
+
+  return this.slice(newIndexStart, newIndexEnd);
+};
