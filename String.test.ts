@@ -309,3 +309,26 @@ describe("17. String.prototype.slice", () => {
     expect(string.slice(0, 20)).toBe("hello, world");
   });
 });
+
+describe("18. String.prototype.split", () => {
+  const string = "hello, world";
+
+  test("1) if seprator is undefined return string in array.", () => {
+    expect(string.split()).toStrictEqual([string]);
+  });
+
+  test("2) if separator is empty string, return slplited string in array.", () => {
+    expect(string.split("")).toStrictEqual(Array.from(string));
+    expect(string.split("", 2)).toStrictEqual(Array.from(string).slice(0, 2));
+  });
+
+  test("3) if there is separator, return separator is emtpy string.", () => {
+    expect(string.split("h")).toStrictEqual(["", "ello, world"]);
+    expect(string.split("he")).toStrictEqual(["", "llo, world"]);
+  });
+
+  test("4) if there are separator and limit, return separator is emtpy string and string as much as limit.", () => {
+    expect("ababcc".split("ab", 2)).toStrictEqual(["", ""]);
+    expect(string.split("o", 1)).toStrictEqual(["hell"]);
+  });
+});

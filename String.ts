@@ -392,3 +392,54 @@ String.prototype.slice = function (indexStart: number, indexEnd?: number) {
 
   return result;
 };
+
+String.prototype.split = function (separator?: string, limit?: number) {
+  //separate string, limit number
+
+  //'abcd'.split() -> ['abcd']
+  if (separator === undefined) {
+    return [this];
+  }
+
+  //'abcd'.split('') -> ['a','b','c','d']
+  if (separator === "") {
+    return Array.from(this).slice(0, limit);
+  }
+
+  //if length of saparator is bigger than one, separator must exactly same word.
+
+  //'abcd'.split('a') -> ['','bcd']
+
+  const result: string[] = [];
+  let index = this.indexOf(separator);
+
+  if (index === -1) {
+    //'abcd'.split('ef') -> ['abcd']
+    return [this];
+  } else {
+    //'abcd'.split('bc') -> ['a','d']
+    //'aaaa'.split('a') -> ['','','','']
+    //'hello world'.split(' ') -> ['hello','world']
+
+    //배열에 처음 separator가 출연하기 전 string을 넣음
+
+    let matchIndex = 0;
+    let startIndex = 0;
+    let count = 0;
+
+    while ((matchIndex = this.indexOf(separator, startIndex)) !== -1) {
+      result.push(this.slice(startIndex, matchIndex));
+      startIndex = matchIndex + separator.length;
+      count++;
+
+      if (limit !== undefined && count === limit - 1) {
+        break;
+      }
+    }
+
+    //separator가 나타난 것들을 모두 제외한 뒤 남은것들을 배열에 넣음
+    result.push(this.slice(startIndex));
+
+    return limit !== undefined ? result.slice(0, limit) : result;
+  }
+};
