@@ -23,3 +23,21 @@ describe("1. Array.prototype.at", () => {
     expect(array.at(-1 * array.length - 2)).toBeUndefined();
   });
 });
+
+describe("2. Array.prototype.concat", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) if there are no args, return shallow copied existing array.", () => {
+    expect(array.concat()).toEqual(array.slice());
+  });
+
+  test("2) if there are args, return connect existing array and args.", () => {
+    expect(array.concat(["d"])).toEqual(["a", "b", "c", "d"]);
+    expect(array.concat(["e"])).toEqual(["a", "b", "c", "e"]);
+  });
+
+  test("3) if args is string or number, return connect existing array and args.", () => {
+    expect(array.concat("d")).toEqual(["a", "b", "c", "d"]);
+    expect(array.concat(2)).toEqual(["a", "b", "c", 2]);
+  });
+});
