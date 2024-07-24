@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test string": "jest string/String.test.ts",
+    "test array": "jest array/Array.test.ts"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
