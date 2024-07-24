@@ -72,3 +72,13 @@ Array.prototype.copyWithin = function (
 
   return this;
 };
+
+Array.prototype.entries = function* () {
+  //return iterator object
+  //function* -> generator function
+  //yield -> pause function making, return generator object
+
+  for (let i = 0; i < this.length; i++) {
+    yield [i, this[i]];
+  }
+};

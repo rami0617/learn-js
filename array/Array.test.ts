@@ -59,3 +59,17 @@ describe("3. Array.prototype.copyWithin", () => {
     expect(["a", "b", "c"].copyWithin(1, 6, 2)).toEqual(["a", "b", "c"]);
   });
 });
+
+describe("4. Array.prototype.entries", () => {
+  const array = ["a", "b", "c"].entries();
+
+  test("1) should return an iterator with index-value pairs.", () => {
+    expect(array.next()).toEqual({ value: [0, "a"], done: false });
+    expect(array.next()).toEqual({ value: [1, "b"], done: false });
+    expect(array.next()).toEqual({ value: [2, "c"], done: false });
+  });
+
+  test("2) should work with empty arrays.", () => {
+    expect([].entries().next()).toEqual({ value: undefined, done: true }); //'true' means completed circuit
+  });
+});
