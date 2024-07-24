@@ -41,3 +41,21 @@ describe("2. Array.prototype.concat", () => {
     expect(array.concat(2)).toEqual(["a", "b", "c", 2]);
   });
 });
+
+describe("3. Array.prototype.copyWithin", () => {
+  test("1) copies the element in start to target.", () => {
+    expect(["a", "b", "c"].copyWithin(1, 2)).toEqual(["a", "c", "c"]);
+    expect(["a", "b", "c"].copyWithin(0, 1)).toEqual(["b", "c", "c"]);
+  });
+
+  test("2) copies the element in start to end to target.", () => {
+    expect(["a", "b", "c"].copyWithin(1, 2, 3)).toEqual(["a", "c", "c"]);
+    expect(["a", "b", "c"].copyWithin(0, 1, 2)).toEqual(["b", "b", "c"]);
+  });
+
+  test("3) if start and end are equal or start bigger than length of array or target bigger than length of array, return exsiting array.", () => {
+    expect(["a", "b", "c"].copyWithin(1, 2, 2)).toEqual(["a", "b", "c"]);
+    expect(["a", "b", "c"].copyWithin(4, 2, 2)).toEqual(["a", "b", "c"]);
+    expect(["a", "b", "c"].copyWithin(1, 6, 2)).toEqual(["a", "b", "c"]);
+  });
+});

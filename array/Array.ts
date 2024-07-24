@@ -29,3 +29,46 @@ Array.prototype.concat = function <T>(...values: (T | ConcatArray<T>)[]): T[] {
 
   return result;
 };
+
+Array.prototype.copyWithin = function (
+  target: number,
+  start: number,
+  end?: number
+) {
+  // part of an array shallow copy and move to another position
+  // don't change length of array
+  // change existing array
+
+  if (target >= this.length || start >= this.length || end === start) {
+    return this;
+  }
+
+  let newTarget = target < 0 ? target + this.length : target;
+  let newStart = start < 0 ? start + this.length : start;
+  let newEnd =
+    end === undefined ? this.length : end < 0 ? end + this.length : end;
+
+  if (newTarget < 0) {
+    newTarget = 0;
+  }
+
+  if (newStart < 0) {
+    newStart = 0;
+  }
+
+  if (newEnd > this.length) {
+    newEnd = this.length;
+  }
+
+  const range = Math.min(newEnd - newStart, this.length - newTarget);
+
+  if (range <= 0) return this;
+
+  const copiedItem = this.slice(newStart, newStart + range);
+
+  for (let i = 0; i < range; i++) {
+    this[newTarget + i] = copiedItem[i];
+  }
+
+  return this;
+};
