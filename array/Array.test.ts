@@ -23,3 +23,81 @@ describe("1. Array.prototype.at", () => {
     expect(array.at(-1 * array.length - 2)).toBeUndefined();
   });
 });
+
+describe("2. Array.prototype.concat", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) if there are no args, return shallow copied existing array.", () => {
+    expect(array.concat()).toEqual(array.slice());
+  });
+
+  test("2) if there are args, return connect existing array and args.", () => {
+    expect(array.concat(["d"])).toEqual(["a", "b", "c", "d"]);
+    expect(array.concat(["e"])).toEqual(["a", "b", "c", "e"]);
+  });
+
+  test("3) if args is string or number, return connect existing array and args.", () => {
+    expect(array.concat("d")).toEqual(["a", "b", "c", "d"]);
+    expect(array.concat(2)).toEqual(["a", "b", "c", 2]);
+  });
+});
+
+describe("3. Array.prototype.copyWithin", () => {
+  test("1) copies the element in start to target.", () => {
+    expect(["a", "b", "c"].copyWithin(1, 2)).toEqual(["a", "c", "c"]);
+    expect(["a", "b", "c"].copyWithin(0, 1)).toEqual(["b", "c", "c"]);
+  });
+
+  test("2) copies the element in start to end to target.", () => {
+    expect(["a", "b", "c"].copyWithin(1, 2, 3)).toEqual(["a", "c", "c"]);
+    expect(["a", "b", "c"].copyWithin(0, 1, 2)).toEqual(["b", "b", "c"]);
+  });
+
+  test("3) if start and end are equal or start bigger than length of array or target bigger than length of array, return exsiting array.", () => {
+    expect(["a", "b", "c"].copyWithin(1, 2, 2)).toEqual(["a", "b", "c"]);
+    expect(["a", "b", "c"].copyWithin(4, 2, 2)).toEqual(["a", "b", "c"]);
+    expect(["a", "b", "c"].copyWithin(1, 6, 2)).toEqual(["a", "b", "c"]);
+  });
+});
+
+describe("4. Array.prototype.entries", () => {
+  const array = ["a", "b", "c"].entries();
+
+  test("1) should return an iterator with index-value pairs.", () => {
+    expect(array.next()).toEqual({ value: [0, "a"], done: false });
+    expect(array.next()).toEqual({ value: [1, "b"], done: false });
+    expect(array.next()).toEqual({ value: [2, "c"], done: false });
+  });
+
+  test("2) should work with empty arrays.", () => {
+    expect([].entries().next()).toEqual({ value: undefined, done: true }); //'true' means completed circuit
+  });
+});
+
+describe("5. Array.prototype.every", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return true when elements pass.", () => {
+    expect(["a", "a", "a"].every((element) => element === "a")).toBeTruthy();
+  });
+
+  test("2) should return false when elements not pass.", () => {
+    expect(array.every((element) => element === "a")).toBeFalsy();
+  });
+});
+
+describe("6. Array.prototype.fill", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return fill value.", () => {
+    expect(array.fill("1")).toMatchObject(["1", "1", "1"]);
+  });
+
+  test("2) should return fill value to start, not include end", () => {
+    expect(array.fill("2", 1, 2)).toMatchObject(["1", "2", "1"]);
+  });
+
+  test("3) should return fill the array with value from start to last index of array.", () => {
+    expect(array.fill("2", 1)).toMatchObject(["1", "2", "2"]);
+  });
+});
