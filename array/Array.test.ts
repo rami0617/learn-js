@@ -73,3 +73,15 @@ describe("4. Array.prototype.entries", () => {
     expect([].entries().next()).toEqual({ value: undefined, done: true }); //'true' means completed circuit
   });
 });
+
+describe("5. Array.prototype.every", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return true when elements pass.", () => {
+    expect(["a", "a", "a"].every((element) => element === "a")).toBeTruthy();
+  });
+
+  test("2) should return false when elements not pass.", () => {
+    expect(array.every((element) => element === "a")).toBeFalsy();
+  });
+});

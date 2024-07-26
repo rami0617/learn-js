@@ -82,3 +82,13 @@ Array.prototype.entries = function* () {
     yield [i, this[i]];
   }
 };
+
+Array.prototype.every = function (callBackFn: () => void, thisArg?: any) {
+  for (let i = 0; i < this.length; i++) {
+    if (!callBackFn.call(thisArg, this[i], i, this)) {
+      return false;
+    }
+  }
+
+  return true;
+};
