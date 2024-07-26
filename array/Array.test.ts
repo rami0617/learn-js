@@ -85,3 +85,19 @@ describe("5. Array.prototype.every", () => {
     expect(array.every((element) => element === "a")).toBeFalsy();
   });
 });
+
+describe("6. Array.prototype.fill", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return fill value.", () => {
+    expect(array.fill("1")).toMatchObject(["1", "1", "1"]);
+  });
+
+  test("2) should return fill value to start, not include end", () => {
+    expect(array.fill("2", 1, 2)).toMatchObject(["1", "2", "1"]);
+  });
+
+  test("3) should return fill the array with value from start to last index of array.", () => {
+    expect(array.fill("2", 1)).toMatchObject(["1", "2", "2"]);
+  });
+});

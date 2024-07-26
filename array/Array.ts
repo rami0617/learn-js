@@ -92,3 +92,26 @@ Array.prototype.every = function (callBackFn: () => void, thisArg?: any) {
 
   return true;
 };
+
+Array.prototype.fill = function (value, start?: number, end?: number) {
+  if (value === undefined) return this;
+
+  //not make new array.
+
+  let newStart = start === undefined ? 0 : start;
+  let newEnd = end === undefined ? this.length : end;
+
+  if (newStart < 0) newStart = start + this.length;
+  if (newEnd < 0) newEnd = end + this.length;
+
+  newStart = Math.max(newStart, 0);
+  newEnd = Math.min(newEnd, this.length);
+
+  if (newStart >= newEnd) return this;
+
+  for (let i = newStart; i < newEnd; i++) {
+    this[i] = value;
+  }
+
+  return this;
+};
