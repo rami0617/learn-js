@@ -101,3 +101,19 @@ describe("6. Array.prototype.fill", () => {
     expect(array.fill("2", 1)).toMatchObject(["1", "2", "2"]);
   });
 });
+
+describe("7. Array.prototype.filter", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return array containing only the elements returned as true in callbackFn.", () => {
+    expect(array.filter((ele) => ele === "a")).toMatchObject(["a"]);
+    expect(array.filter((ele) => ele === "b")).toMatchObject(["b"]);
+  });
+
+  test("2) should do not change the existing array.", () => {
+    const originArray = ["a", "b", "c"];
+    array.filter((ele) => ele === "a");
+
+    expect(array).toEqual(originArray);
+  });
+});

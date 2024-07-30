@@ -115,3 +115,16 @@ Array.prototype.fill = function (value, start?: number, end?: number) {
 
   return this;
 };
+
+Array.prototype.filter = function (callbackFn: () => void, thisArg?: any) {
+  //create new array
+  const result: any[] = [];
+
+  for (let i = 0; i < this.length; i++) {
+    if (callbackFn.call(i, this[i], thisArg)) {
+      result.push(this[i]);
+    }
+  }
+
+  return result;
+};
