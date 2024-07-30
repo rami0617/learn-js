@@ -101,3 +101,98 @@ describe("6. Array.prototype.fill", () => {
     expect(array.fill("2", 1)).toMatchObject(["1", "2", "2"]);
   });
 });
+
+describe("7. Array.prototype.filter", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return array containing only the elements returned as true in callbackFn.", () => {
+    expect(array.filter((ele) => ele === "a")).toMatchObject(["a"]);
+    expect(array.filter((ele) => ele === "b")).toMatchObject(["b"]);
+  });
+
+  test("2) should do not change the existing array.", () => {
+    const originArray = ["a", "b", "c"];
+    array.filter((ele) => ele === "a");
+
+    expect(array).toEqual(originArray);
+  });
+});
+
+describe("8. Array.prototype.find", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return first element returned as true in callbackFn.", () => {
+    expect(array.find((ele) => ele === "a")).toEqual("a");
+    expect(array.find((ele) => ele === "b")).toEqual("b");
+  });
+
+  test("2) if there is no element as true in callbackFn, return undefined.", () => {
+    expect(array.find((ele) => ele === "d")).toBeUndefined();
+    expect(array.find((ele) => ele === "e")).toBeUndefined();
+  });
+});
+
+describe("9. Array.prototype.findIndex", () => {
+  const array = ["a", "b", "c", "a", "b"];
+
+  test("1) should return first index returned as true in callbackFn.", () => {
+    expect(array.findIndex((ele) => ele === "a")).toEqual(0);
+    expect(array.findIndex((ele) => ele === "b")).toEqual(1);
+  });
+
+  test("2) if there is no element as true in callbackFn, return -1.", () => {
+    expect(array.findIndex((ele) => ele === "d")).toEqual(-1);
+    expect(array.findIndex((ele) => ele === "e")).toEqual(-1);
+  });
+});
+
+describe("10. Array.prototype.findLast", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) should return first element returned as true in callbackFn that find from the end of the array.", () => {
+    expect(array.findLast((ele) => ele > 2)).toEqual(5);
+    expect(array.findLast((ele) => ele > 3)).toEqual(5);
+  });
+
+  test("2) if there is no element as true in callbackFn, return undfined.", () => {
+    expect(array.findLast((ele) => ele > 10)).toBeUndefined();
+    expect(array.findLast((ele) => ele < -1)).toBeUndefined();
+  });
+});
+
+describe("11. Array.prototype.findLastIndex", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) should return first index returned as true in callbackFn that find from the end of the array.", () => {
+    expect(array.findLastIndex((ele) => ele > 3)).toEqual(4);
+    expect(array.findLastIndex((ele) => ele > 1)).toEqual(4);
+  });
+
+  test("2) if there is no element as true in callbackFn, return -1.", () => {
+    expect(array.findLastIndex((ele) => ele > 10)).toEqual(-1);
+    expect(array.findLastIndex((ele) => ele < 1)).toEqual(-1);
+  });
+});
+
+describe("12. Array.prototype.flat", () => {
+  test("1) if there is no arg, depth as 1.", () => {
+    expect([1, 2, [3, 4, 5]].flat()).toEqual([1, 2, [3, 4, 5]].flat(1));
+    expect([["a"], [["b"]]].flat()).toEqual([["a"], [["b"]]].flat(1));
+  });
+
+  test("2) if there is arg, flatten by depth.", () => {
+    expect([1, 2, [3, 4, 5]].flat(1)).toEqual([1, 2, 3, 4, 5]);
+    expect([[["a"]], [["b"]]].flat(2)).toEqual(["a", "b"]);
+  });
+});
+
+describe("13. Array.prototype.flatMap", () => {
+  test("1) flatMap method has the same operation as the Flat method and the Map method combined", () => {
+    expect([1, 2, [3, 4, 5]].flatMap((ele) => ele * 2)).toEqual(
+      [1, 2, [3, 4, 5]].map((ele) => ele * 2).flat()
+    );
+    expect([["a"], [["b"]]].flatMap((ele) => ele + "!")).toEqual(
+      [["a"], [["b"]]].map((ele) => ele + "!").flat()
+    );
+  });
+});

@@ -83,7 +83,10 @@ Array.prototype.entries = function* () {
   }
 };
 
-Array.prototype.every = function (callBackFn: () => void, thisArg?: any) {
+Array.prototype.every = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
   for (let i = 0; i < this.length; i++) {
     if (!callBackFn.call(thisArg, this[i], i, this)) {
       return false;
@@ -114,4 +117,126 @@ Array.prototype.fill = function (value, start?: number, end?: number) {
   }
 
   return this;
+};
+
+Array.prototype.filter = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  //create new array
+  const result: any[] = [];
+
+  for (let i = 0; i < this.length; i++) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      result.push(this[i]);
+    }
+  }
+
+  return result;
+};
+
+Array.prototype.find = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  // return the first element in provided array that satisfies the provided testing function.
+  // if no value satisfy the testing function, return undefined.
+
+  for (let i = 0; i < this.length; i++) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return this[i];
+    }
+  }
+
+  return undefined;
+};
+
+Array.prototype.findIndex = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  //similar to find method
+  //return index
+
+  for (let i = 0; i < this.length; i++) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+Array.prototype.findLast = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  //opposite of find method
+
+  for (let i = this.length - 1; i >= 0; i--) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return this[i];
+    }
+  }
+
+  return undefined;
+};
+
+Array.prototype.findLastIndex = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  //opposite of findIndex method.
+
+  for (let i = this.length - 1; i >= 0; i--) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+Array.prototype.flat = function (depth: number = 1) {
+  let newDepth = depth;
+  let newArray: any = this;
+  let result: any[] = [];
+
+  while (newDepth !== 0) {
+    result = [];
+
+    for (let i = 0; i < newArray.length; i++) {
+      if (Array.isArray(newArray[i])) {
+        result.push(...newArray[i]);
+      } else {
+        result.push(newArray[i]);
+      }
+    }
+
+    newArray = result;
+    newDepth--;
+  }
+
+  return result;
+};
+
+Array.prototype.flatMap = function (
+  callBackFn: (element: any, index: number, array: any[]) => any,
+  thisArg?: any
+) {
+  //similar to map().flat(1), a little more efficient
+
+  const result: any[] = [];
+
+  for (let i = 0; i < this.length; i++) {
+    const temp = callBackFn.call(thisArg, this[i], i, this);
+
+    if (Array.isArray(temp)) {
+      result.push(...temp);
+    } else {
+      result.push(temp);
+    }
+  }
+
+  return result;
 };
