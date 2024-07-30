@@ -159,3 +159,17 @@ describe("10. Array.prototype.findLast", () => {
     expect(array.findLast((ele) => ele < -1)).toBeUndefined();
   });
 });
+
+describe("11. Array.prototype.findLastIndex", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) should return first index returned as true in callbackFn that find from the end of the array.", () => {
+    expect(array.findLastIndex((ele) => ele > 3)).toEqual(4);
+    expect(array.findLastIndex((ele) => ele > 1)).toEqual(4);
+  });
+
+  test("2) if there is no element as true in callbackFn, return -1.", () => {
+    expect(array.findLastIndex((ele) => ele > 10)).toEqual(-1);
+    expect(array.findLastIndex((ele) => ele < 1)).toEqual(-1);
+  });
+});
