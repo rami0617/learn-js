@@ -173,3 +173,15 @@ describe("11. Array.prototype.findLastIndex", () => {
     expect(array.findLastIndex((ele) => ele < 1)).toEqual(-1);
   });
 });
+
+describe("12. Array.prototype.flat", () => {
+  test("1) if there is no arg, depth as 1.", () => {
+    expect([1, 2, [3, 4, 5]].flat()).toEqual([1, 2, [3, 4, 5]].flat(1));
+    expect([["a"], [["b"]]].flat()).toEqual([["a"], [["b"]]].flat(1));
+  });
+
+  test("2) if there is arg, flatten by depth.", () => {
+    expect([1, 2, [3, 4, 5]].flat(1)).toEqual([1, 2, 3, 4, 5]);
+    expect([[["a"]], [["b"]]].flat(2)).toEqual(["a", "b"]);
+  });
+});

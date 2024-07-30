@@ -40,7 +40,7 @@
 9) Array.prototype.findIndex()
 10) Array.prototype.findLast()
 11) Array.prototype.findeLastIndex()
-12) Array.prototype.flat()
+12) Array.prototype.flat() //🔂
 13) Array.prototype.flatMap()
 14) Array.prototype.forEach()
 15) Array.prototype.includes()

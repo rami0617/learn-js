@@ -196,3 +196,26 @@ Array.prototype.findLastIndex = function (
 
   return -1;
 };
+
+Array.prototype.flat = function (depth: number = 1) {
+  let newDepth = depth;
+  let newArray: any = this;
+  let result: any[] = [];
+
+  while (newDepth !== 0) {
+    result = [];
+
+    for (let i = 0; i < newArray.length; i++) {
+      if (Array.isArray(newArray[i])) {
+        result.push(...newArray[i]);
+      } else {
+        result.push(newArray[i]);
+      }
+    }
+
+    newArray = result;
+    newDepth--;
+  }
+
+  return result;
+};
