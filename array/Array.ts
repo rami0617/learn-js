@@ -219,3 +219,24 @@ Array.prototype.flat = function (depth: number = 1) {
 
   return result;
 };
+
+Array.prototype.flatMap = function (
+  callBackFn: (element: any, index: number, array: any[]) => any,
+  thisArg?: any
+) {
+  //similar to map().flat(1), a little more efficient
+
+  const result: any[] = [];
+
+  for (let i = 0; i < this.length; i++) {
+    const temp = callBackFn.call(thisArg, this[i], i, this);
+
+    if (Array.isArray(temp)) {
+      result.push(...temp);
+    } else {
+      result.push(temp);
+    }
+  }
+
+  return result;
+};

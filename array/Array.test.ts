@@ -185,3 +185,14 @@ describe("12. Array.prototype.flat", () => {
     expect([[["a"]], [["b"]]].flat(2)).toEqual(["a", "b"]);
   });
 });
+
+describe("13. Array.prototype.flatMap", () => {
+  test("1) flatMap method has the same operation as the Flat method and the Map method combined", () => {
+    expect([1, 2, [3, 4, 5]].flatMap((ele) => ele * 2)).toEqual(
+      [1, 2, [3, 4, 5]].map((ele) => ele * 2).flat()
+    );
+    expect([["a"], [["b"]]].flatMap((ele) => ele + "!")).toEqual(
+      [["a"], [["b"]]].map((ele) => ele + "!").flat()
+    );
+  });
+});
