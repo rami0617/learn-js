@@ -166,3 +166,18 @@ Array.prototype.findIndex = function (
 
   return -1;
 };
+
+Array.prototype.findLast = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  //opposite of find method
+
+  for (let i = this.length - 1; i >= 0; i--) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return this[i];
+    }
+  }
+
+  return undefined;
+};
