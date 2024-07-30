@@ -131,3 +131,17 @@ describe("8. Array.prototype.find", () => {
     expect(array.find((ele) => ele === "e")).toBeUndefined();
   });
 });
+
+describe("9. Array.prototype.findIndex", () => {
+  const array = ["a", "b", "c", "a", "b"];
+
+  test("1) should return first index returned as true in callbackFn.", () => {
+    expect(array.findIndex((ele) => ele === "a")).toEqual(0);
+    expect(array.findIndex((ele) => ele === "b")).toEqual(1);
+  });
+
+  test("2) if there is no element as true in callbackFn, return -1.", () => {
+    expect(array.findIndex((ele) => ele === "d")).toEqual(-1);
+    expect(array.findIndex((ele) => ele === "e")).toEqual(-1);
+  });
+});
