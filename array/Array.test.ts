@@ -117,3 +117,17 @@ describe("7. Array.prototype.filter", () => {
     expect(array).toEqual(originArray);
   });
 });
+
+describe("8. Array.prototype.find", () => {
+  const array = ["a", "b", "c"];
+
+  test("1) should return first element returned as true in callbackFn.", () => {
+    expect(array.find((ele) => ele === "a")).toEqual("a");
+    expect(array.find((ele) => ele === "b")).toEqual("b");
+  });
+
+  test("2) if there is no element as true in callbackFn, return undefined.", () => {
+    expect(array.find((ele) => ele === "d")).toBeUndefined();
+    expect(array.find((ele) => ele === "e")).toBeUndefined();
+  });
+});

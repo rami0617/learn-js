@@ -121,10 +121,23 @@ Array.prototype.filter = function (callbackFn: () => void, thisArg?: any) {
   const result: any[] = [];
 
   for (let i = 0; i < this.length; i++) {
-    if (callbackFn.call(i, this[i], thisArg)) {
+    if (callbackFn.call(thisArg, this[i], i, this)) {
       result.push(this[i]);
     }
   }
 
   return result;
+};
+
+Array.prototype.find = function (callBackFn: () => void, thisArg?: any) {
+  // return the first element in provided array that satisfies the provided testing function.
+  // if no value satisfy the testing function, return undefined.
+
+  for (let i = 0; i < this.length; i++) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return this[i];
+    }
+  }
+
+  return undefined;
 };
