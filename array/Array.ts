@@ -273,3 +273,23 @@ Array.prototype.includes = function (searchElement: any, fromIndex?: number) {
 
   return false;
 };
+
+Array.prototype.indexOf = function (searchElement: any, fromIndex?: number) {
+  let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
+
+  if (newFromIndex < 0) {
+    newFromIndex = Math.max(fromIndex + this.length, 0);
+  }
+
+  if (newFromIndex >= this.length) {
+    return -1;
+  }
+
+  for (let i = newFromIndex; i < this.length; i++) {
+    if (this[i] === searchElement) {
+      return i;
+    }
+  }
+
+  return -1;
+};

@@ -228,3 +228,22 @@ describe("15. Array.prototype.includes", () => {
     expect(array.includes(6)).not.toBeTruthy();
   });
 });
+
+describe("16. Array.prototype.indexOf", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) if the array contians the search value, return index.", () => {
+    expect(array.indexOf(1)).toBe(0);
+    expect(array.indexOf(3, 1)).toBe(2);
+  });
+
+  test("2) if the array does not contain the search value, return -1.", () => {
+    expect(array.indexOf(6)).toBe(-1);
+    expect(array.indexOf(1, 2)).toBe(-1);
+  });
+
+  test("3) if there is fromIndex, search for the searchElement starting from fromIndex.", () => {
+    expect(array.indexOf(6)).toBe(-1);
+    expect(array.indexOf(1, 2)).toBe(-1);
+  });
+});
