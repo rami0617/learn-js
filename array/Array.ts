@@ -253,3 +253,23 @@ Array.prototype.forEach = function (
     callBackFn.call(thisArg, this[i], i, this);
   }
 };
+
+Array.prototype.includes = function (searchElement: any, fromIndex?: number) {
+  let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
+
+  if (newFromIndex < 0) {
+    newFromIndex = Math.max(newFromIndex + this.length, 0);
+  }
+
+  if (newFromIndex >= this.length) {
+    return false;
+  }
+
+  for (let i = newFromIndex; i < this.length; i++) {
+    if (this[i] === searchElement) {
+      return true;
+    }
+  }
+
+  return false;
+};

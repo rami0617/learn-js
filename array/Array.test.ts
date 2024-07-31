@@ -216,3 +216,15 @@ describe("14. Array.prototype.forEach", () => {
     expect(count).toBe(0);
   });
 });
+
+describe("15. Array.prototype.includes", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) if the array contians the search value, return true.", () => {
+    expect(array.includes(1)).toBeTruthy();
+  });
+
+  test("2) if the array does not contain the search value, return false.", () => {
+    expect(array.includes(6)).not.toBeTruthy();
+  });
+});
