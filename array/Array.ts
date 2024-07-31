@@ -240,3 +240,91 @@ Array.prototype.flatMap = function (
 
   return result;
 };
+
+Array.prototype.forEach = function (
+  callBackFn: (element: any, index: number, array: any[]) => any,
+  thisArg?: any
+) {
+  for (let i = 0; i < this.length; i++) {
+    //call method first arg -> thisArg
+    //element -> this[i]
+    //index -> i
+    //array ->
+    callBackFn.call(thisArg, this[i], i, this);
+  }
+};
+
+Array.prototype.includes = function (searchElement: any, fromIndex?: number) {
+  let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
+
+  if (newFromIndex < 0) {
+    newFromIndex = Math.max(newFromIndex + this.length, 0);
+  }
+
+  if (newFromIndex >= this.length) {
+    return false;
+  }
+
+  for (let i = newFromIndex; i < this.length; i++) {
+    if (this[i] === searchElement) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+Array.prototype.indexOf = function (searchElement: any, fromIndex?: number) {
+  let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
+
+  if (newFromIndex < 0) {
+    newFromIndex = Math.max(fromIndex + this.length, 0);
+  }
+
+  if (newFromIndex >= this.length) {
+    return -1;
+  }
+
+  for (let i = newFromIndex; i < this.length; i++) {
+    if (this[i] === searchElement) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+Array.prototype.join = function (separator: string = ",") {
+  if (this.length === 0) return "";
+
+  let result = "";
+  let newSeparator =
+    separator === undefined || separator === null ? "" : separator;
+
+  function helper(element) {
+    if (!Array.isArray(element))
+      return element === null || element === undefined
+        ? ""
+        : element.toString();
+
+    let newArray = element.slice();
+    let temp = "";
+
+    for (let i = 0; i < newArray.length; i++) {
+      temp += helper(newArray[i]);
+      if (i < newArray.length - 1) {
+        temp += newSeparator;
+      }
+    }
+    return temp;
+  }
+
+  for (let i = 0; i < this.length; i++) {
+    result += helper(this[i]);
+    if (i < this.length - 1) {
+      result += newSeparator;
+    }
+  }
+
+  return result;
+};

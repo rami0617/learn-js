@@ -196,3 +196,67 @@ describe("13. Array.prototype.flatMap", () => {
     );
   });
 });
+
+describe("14. Array.prototype.forEach", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) forEach method is call callBackFn and return undefined.", () => {
+    expect(array.forEach((ele) => ele * 2)).toBeUndefined();
+  });
+
+  test("2) even if calBackFn is promise, does not wait.", () => {
+    const multiply = async (a, b) => a * b;
+    let count = 0;
+
+    array.forEach(async (ele, index) => {
+      count += await multiply(ele, index);
+    });
+
+    expect(count).not.toBe(40);
+    expect(count).toBe(0);
+  });
+});
+
+describe("15. Array.prototype.includes", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) if the array contians the search value, return true.", () => {
+    expect(array.includes(1)).toBeTruthy();
+  });
+
+  test("2) if the array does not contain the search value, return false.", () => {
+    expect(array.includes(6)).not.toBeTruthy();
+  });
+});
+
+describe("16. Array.prototype.indexOf", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) if the array contians the search value, return index.", () => {
+    expect(array.indexOf(1)).toBe(0);
+    expect(array.indexOf(3, 1)).toBe(2);
+  });
+
+  test("2) if the array does not contain the search value, return -1.", () => {
+    expect(array.indexOf(6)).toBe(-1);
+    expect(array.indexOf(1, 2)).toBe(-1);
+  });
+
+  test("3) if there is fromIndex, search for the searchElement starting from fromIndex.", () => {
+    expect(array.indexOf(6)).toBe(-1);
+    expect(array.indexOf(1, 2)).toBe(-1);
+  });
+});
+
+describe("17. Array.prototype.join", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) if there is no separator, return join all element in array. default separator is ',' ", () => {
+    expect(array.join()).toBe("1,2,3,4,5");
+  });
+
+  test("2) if array is nested array, return joined elements.", () => {
+    expect([array].join()).toBe("1,2,3,4,5");
+    expect([1, [[2], 3, 4, 5]].join()).toBe("1,2,3,4,5");
+  });
+});
