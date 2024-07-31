@@ -293,3 +293,38 @@ Array.prototype.indexOf = function (searchElement: any, fromIndex?: number) {
 
   return -1;
 };
+
+Array.prototype.join = function (separator: string = ",") {
+  if (this.length === 0) return "";
+
+  let result = "";
+  let newSeparator =
+    separator === undefined || separator === null ? "" : separator;
+
+  function helper(element) {
+    if (!Array.isArray(element))
+      return element === null || element === undefined
+        ? ""
+        : element.toString();
+
+    let newArray = element.slice();
+    let temp = "";
+
+    for (let i = 0; i < newArray.length; i++) {
+      temp += helper(newArray[i]);
+      if (i < newArray.length - 1) {
+        temp += newSeparator;
+      }
+    }
+    return temp;
+  }
+
+  for (let i = 0; i < this.length; i++) {
+    result += helper(this[i]);
+    if (i < this.length - 1) {
+      result += newSeparator;
+    }
+  }
+
+  return result;
+};

@@ -247,3 +247,16 @@ describe("16. Array.prototype.indexOf", () => {
     expect(array.indexOf(1, 2)).toBe(-1);
   });
 });
+
+describe("17. Array.prototype.join", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) if there is no separator, return join all element in array. default separator is ',' ", () => {
+    expect(array.join()).toBe("1,2,3,4,5");
+  });
+
+  test("2) if array is nested array, return joined elements.", () => {
+    expect([array].join()).toBe("1,2,3,4,5");
+    expect([1, [[2], 3, 4, 5]].join()).toBe("1,2,3,4,5");
+  });
+});
