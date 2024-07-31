@@ -196,3 +196,23 @@ describe("13. Array.prototype.flatMap", () => {
     );
   });
 });
+
+describe("14. Array.prototype.forEach", () => {
+  const array = [1, 2, 3, 4, 5];
+
+  test("1) forEach method is call callBackFn and return undefined.", () => {
+    expect(array.forEach((ele) => ele * 2)).toBeUndefined();
+  });
+
+  test("2) even if calBackFn is promise, does not wait.", () => {
+    const multiply = async (a, b) => a * b;
+    let count = 0;
+
+    array.forEach(async (ele, index) => {
+      count += await multiply(ele, index);
+    });
+
+    expect(count).not.toBe(40);
+    expect(count).toBe(0);
+  });
+});

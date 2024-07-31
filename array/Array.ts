@@ -240,3 +240,16 @@ Array.prototype.flatMap = function (
 
   return result;
 };
+
+Array.prototype.forEach = function (
+  callBackFn: (element: any, index: number, array: any[]) => any,
+  thisArg?: any
+) {
+  for (let i = 0; i < this.length; i++) {
+    //call method first arg -> thisArg
+    //element -> this[i]
+    //index -> i
+    //array ->
+    callBackFn.call(thisArg, this[i], i, this);
+  }
+};
