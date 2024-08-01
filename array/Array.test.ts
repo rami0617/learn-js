@@ -294,3 +294,16 @@ describe("19. Array.prototype.lastIndexOf", () => {
     expect(array.lastIndexOf(NaN)).toBe(-1);
   });
 });
+
+describe("20. Array.prototype.map", () => {
+  const array = ["A", "B"];
+
+  test("1) should return new array that result of callback function", () => {
+    expect(array.map((ele) => ele + "!")).toMatchObject(["A!", "B!"]);
+    expect(array).not.toMatchObject(["A!", "B!"]);
+  });
+
+  test("2) if sparse array, empty element is not call callback function.", () => {
+    expect([1, , 2].map((ele) => ele * 2)).toMatchObject([2, , 4]);
+  });
+});

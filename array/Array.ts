@@ -358,3 +358,23 @@ Array.prototype.lastIndexOf = function (
 
   return -1;
 };
+
+Array.prototype.map = function (
+  callBackFn: (element: any, index: number, array: any[]),
+  thisArg?: any
+) {
+  //map method return new array
+  //dosen't use new array -> forEach, for ~ of
+  //new array -> map
+
+  const result:any[] = [];
+
+  for (let i = 0; i < this.length; i++) {
+    //sparse array
+    if(this.hasOwnProperty(i)) {
+      result.push(callBackFn.call(thisArg, this[i], i, this));
+    }
+  }
+
+  return result;
+};
