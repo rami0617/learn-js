@@ -276,3 +276,21 @@ describe("18. Array.prototype.keys", () => {
     expect(keys.includes(1)).toBeTruthy();
   });
 });
+
+describe("19. Array.prototype.lastIndexOf", () => {
+  const array = ["A", "B", "B", "A"];
+
+  test("1) searches from the alst index and returns the first element equal to searchElement.", () => {
+    expect(array.lastIndexOf("A")).not.toBe(0);
+    expect(array.lastIndexOf("A")).toBe(3);
+  });
+
+  test("2) if array doesn't have serachEelment, return -1.", () => {
+    expect(array.lastIndexOf("D")).toBe(-1);
+    expect(array.lastIndexOf("C")).toBe(-1);
+  });
+
+  test("2) if searchElement is NaN, return -1.", () => {
+    expect(array.lastIndexOf(NaN)).toBe(-1);
+  });
+});

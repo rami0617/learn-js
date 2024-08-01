@@ -337,3 +337,24 @@ Array.prototype.keys = function* () {
     yield i;
   }
 };
+
+Array.prototype.lastIndexOf = function (
+  searchElement: any,
+  fromIndex?: number
+) {
+  if (Object.is(searchElement, NaN)) return -1;
+  //searches from the alst index and returns the first element equal to searchElement
+  let newFromIndex = fromIndex === undefined ? this.length - 1 : fromIndex;
+
+  if (newFromIndex < 0) {
+    newFromIndex = Math.max(this.length + fromIndex, 0);
+  }
+
+  for (let i = newFromIndex; i >= 0; i--) {
+    if (this[i] === searchElement) {
+      return i;
+    }
+  }
+
+  return -1;
+};
