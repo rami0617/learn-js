@@ -307,3 +307,19 @@ describe("20. Array.prototype.map", () => {
     expect([1, , 2].map((ele) => ele * 2)).toMatchObject([2, , 4]);
   });
 });
+
+describe("20. Array.prototype.pop", () => {
+  const array = ["A", "B"];
+  const array1 = ["C", "D"];
+
+  test("1) if the array is empty return undeifned.", () => {
+    expect([].pop()).toBeUndefined();
+  });
+
+  test("2) the removed element from the array.", () => {
+    array1.pop();
+
+    expect(array.slice().pop()).toBe(array[array.length - 1]);
+    expect(array1).toMatchObject(["C"]);
+  });
+});

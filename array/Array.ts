@@ -378,3 +378,16 @@ Array.prototype.map = function (
 
   return result;
 };
+
+
+Array.prototype.pop = function () {
+  //if the array is empty return undeifned
+  //the removed element from the array
+  if (this.length === 0) return undefined;
+
+  const lastElement = this[this.length-1];
+
+  this.splice(this.length-1, 1);
+
+  return lastElement;
+} 
