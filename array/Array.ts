@@ -328,3 +328,12 @@ Array.prototype.join = function (separator: string = ",") {
 
   return result;
 };
+
+Array.prototype.keys = function* () {
+  //return new array iterator
+  //create key,so return index
+
+  for (let i = 0; i < this.length; i++) {
+    yield i;
+  }
+};

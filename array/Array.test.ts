@@ -260,3 +260,19 @@ describe("17. Array.prototype.join", () => {
     expect([1, [[2], 3, 4, 5]].join()).toBe("1,2,3,4,5");
   });
 });
+
+describe("18. Array.prototype.keys", () => {
+  const array = ["A", "B"];
+  const iterator = array.keys();
+  const keys = [];
+
+  for (const key of iterator) {
+    keys.push(key);
+  }
+
+  test("1) should return array iterator contain key.", () => {
+    expect(array.keys().next().value).toBe(0);
+    expect(keys.includes(0)).toBeTruthy();
+    expect(keys.includes(1)).toBeTruthy();
+  });
+});
