@@ -323,3 +323,22 @@ describe("20. Array.prototype.pop", () => {
     expect(array1).toMatchObject(["C"]);
   });
 });
+
+describe("21. Array.prototype.push", () => {
+  const array = ["A", "B"];
+  const array1 = ["C", "D"];
+
+  test("1) return length of array.", () => {
+    const arrayLength = array.length;
+    const elements = ["C"];
+
+    expect(array.push(...elements)).toBe(arrayLength + elements.length);
+  });
+
+  test("2) should add after last index.", () => {
+    const elements = ["C"];
+    array1.push(...elements);
+
+    expect(array1).toMatchObject(["C", "D", ...elements]);
+  });
+});

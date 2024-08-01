@@ -391,3 +391,14 @@ Array.prototype.pop = function () {
 
   return lastElement;
 } 
+
+Array.prototype.push = function (...element) {
+  //return length of array
+  let lastIndex = this.length -1;
+
+  for(let i = 0; i < element.length; i++) {
+    this[lastIndex + i] = element[i]
+  }
+
+  return this.length;
+}
