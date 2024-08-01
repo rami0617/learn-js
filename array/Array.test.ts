@@ -260,3 +260,85 @@ describe("17. Array.prototype.join", () => {
     expect([1, [[2], 3, 4, 5]].join()).toBe("1,2,3,4,5");
   });
 });
+
+describe("18. Array.prototype.keys", () => {
+  const array = ["A", "B"];
+  const iterator = array.keys();
+  const keys = [];
+
+  for (const key of iterator) {
+    keys.push(key);
+  }
+
+  test("1) should return array iterator contain key.", () => {
+    expect(array.keys().next().value).toBe(0);
+    expect(keys.includes(0)).toBeTruthy();
+    expect(keys.includes(1)).toBeTruthy();
+  });
+});
+
+describe("19. Array.prototype.lastIndexOf", () => {
+  const array = ["A", "B", "B", "A"];
+
+  test("1) searches from the alst index and returns the first element equal to searchElement.", () => {
+    expect(array.lastIndexOf("A")).not.toBe(0);
+    expect(array.lastIndexOf("A")).toBe(3);
+  });
+
+  test("2) if array doesn't have serachEelment, return -1.", () => {
+    expect(array.lastIndexOf("D")).toBe(-1);
+    expect(array.lastIndexOf("C")).toBe(-1);
+  });
+
+  test("2) if searchElement is NaN, return -1.", () => {
+    expect(array.lastIndexOf(NaN)).toBe(-1);
+  });
+});
+
+describe("20. Array.prototype.map", () => {
+  const array = ["A", "B"];
+
+  test("1) should return new array that result of callback function", () => {
+    expect(array.map((ele) => ele + "!")).toMatchObject(["A!", "B!"]);
+    expect(array).not.toMatchObject(["A!", "B!"]);
+  });
+
+  test("2) if sparse array, empty element is not call callback function.", () => {
+    expect([1, , 2].map((ele) => ele * 2)).toMatchObject([2, , 4]);
+  });
+});
+
+describe("20. Array.prototype.pop", () => {
+  const array = ["A", "B"];
+  const array1 = ["C", "D"];
+
+  test("1) if the array is empty return undeifned.", () => {
+    expect([].pop()).toBeUndefined();
+  });
+
+  test("2) the removed element from the array.", () => {
+    array1.pop();
+
+    expect(array.slice().pop()).toBe(array[array.length - 1]);
+    expect(array1).toMatchObject(["C"]);
+  });
+});
+
+describe("21. Array.prototype.push", () => {
+  const array = ["A", "B"];
+  const array1 = ["C", "D"];
+
+  test("1) return length of array.", () => {
+    const arrayLength = array.length;
+    const elements = ["C"];
+
+    expect(array.push(...elements)).toBe(arrayLength + elements.length);
+  });
+
+  test("2) should add after last index.", () => {
+    const elements = ["C"];
+    array1.push(...elements);
+
+    expect(array1).toMatchObject(["C", "D", ...elements]);
+  });
+});

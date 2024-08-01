@@ -328,3 +328,77 @@ Array.prototype.join = function (separator: string = ",") {
 
   return result;
 };
+
+Array.prototype.keys = function* () {
+  //return new array iterator
+  //create key,so return index
+
+  for (let i = 0; i < this.length; i++) {
+    yield i;
+  }
+};
+
+Array.prototype.lastIndexOf = function (
+  searchElement: any,
+  fromIndex?: number
+) {
+  if (Object.is(searchElement, NaN)) return -1;
+  //searches from the alst index and returns the first element equal to searchElement
+  let newFromIndex = fromIndex === undefined ? this.length - 1 : fromIndex;
+
+  if (newFromIndex < 0) {
+    newFromIndex = Math.max(this.length + fromIndex, 0);
+  }
+
+  for (let i = newFromIndex; i >= 0; i--) {
+    if (this[i] === searchElement) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+Array.prototype.map = function (
+  callBackFn: (element: any, index: number, array: any[]),
+  thisArg?: any
+) {
+  //map method return new array
+  //dosen't use new array -> forEach, for ~ of
+  //new array -> map
+
+  const result:any[] = [];
+
+  for (let i = 0; i < this.length; i++) {
+    //sparse array
+    if(this.hasOwnProperty(i)) {
+      result.push(callBackFn.call(thisArg, this[i], i, this));
+    }
+  }
+
+  return result;
+};
+
+
+Array.prototype.pop = function () {
+  //if the array is empty return undeifned
+  //the removed element from the array
+  if (this.length === 0) return undefined;
+
+  const lastElement = this[this.length-1];
+
+  this.splice(this.length-1, 1);
+
+  return lastElement;
+} 
+
+Array.prototype.push = function (...element) {
+  //return length of array
+  let lastIndex = this.length -1;
+
+  for(let i = 0; i < element.length; i++) {
+    this[lastIndex + i] = element[i]
+  }
+
+  return this.length;
+}
