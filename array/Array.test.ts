@@ -358,3 +358,11 @@ describe("23. Array.prototype.reduce", () => {
     expect(() => [].reduce((prev) => prev)).toThrow(TypeError);
   });
 });
+
+describe("24. Array.prototype.reduceRight", () => {
+  const array = ["A", "B"];
+
+  test("1) reduceRight is similar reduce, difference is reduceRight start last element of array.", () => {
+    expect(array.reduceRight((prev, acc) => prev + acc, "!")).toBe("!BA");
+  });
+});

@@ -419,3 +419,25 @@ Array.prototype.reduce = function (
 
   return newAccumulator;
 };
+
+Array.prototype.reduceRight = function (
+  callbackFn: (accumulator, currentValue, currentIndex, array) => any,
+  initialValue?: any
+) {
+  //Thrown if the array contains no elements and initialValue is not provided
+  if (this.length === 0 && initialValue === undefined)
+    throw new TypeError("Error: Reduce of empty array with no initial value");
+
+  //reduce vs reduceRight
+  //reduceRight -> right to left
+  let newAccumulator =
+    initialValue === undefined ? this[this.length - 1] : initialValue;
+  let startIndex =
+    initialValue === undefined ? this.length - 2 : this.length - 1;
+
+  for (let i = startIndex; i >= 0; i--) {
+    newAccumulator = callbackFn(newAccumulator, this[i], i, this);
+  }
+
+  return newAccumulator;
+};
