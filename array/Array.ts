@@ -441,3 +441,15 @@ Array.prototype.reduceRight = function (
 
   return newAccumulator;
 };
+
+Array.prototype.reverse = function () {
+  //reverse is change the original array.
+
+  for (let i = 0; i < Math.floor(this.length / 2); i++) {
+    const temp = this[this.length - 1 - i];
+    this[this.length - 1 - i] = this[i];
+    this[i] = temp;
+  }
+
+  return this;
+};

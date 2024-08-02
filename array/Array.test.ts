@@ -366,3 +366,11 @@ describe("24. Array.prototype.reduceRight", () => {
     expect(array.reduceRight((prev, acc) => prev + acc, "!")).toBe("!BA");
   });
 });
+
+describe("25. Array.prototype.reverse", () => {
+  const array = ["A", "B"];
+
+  test("1) reverse method is change the original array.", () => {
+    expect(array.reverse()).toMatchObject(array);
+  });
+});
