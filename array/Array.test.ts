@@ -308,7 +308,7 @@ describe("20. Array.prototype.map", () => {
   });
 });
 
-describe("20. Array.prototype.pop", () => {
+describe("21. Array.prototype.pop", () => {
   const array = ["A", "B"];
   const array1 = ["C", "D"];
 
@@ -324,7 +324,7 @@ describe("20. Array.prototype.pop", () => {
   });
 });
 
-describe("21. Array.prototype.push", () => {
+describe("22. Array.prototype.push", () => {
   const array = ["A", "B"];
   const array1 = ["C", "D"];
 
@@ -340,5 +340,46 @@ describe("21. Array.prototype.push", () => {
     array1.push(...elements);
 
     expect(array1).toMatchObject(["C", "D", ...elements]);
+  });
+});
+
+describe("23. Array.prototype.reduce", () => {
+  const array = ["A", "B"];
+
+  test("1) if there is initial value, initial accumulator is initial value.", () => {
+    expect(array.reduce((prev, acc) => prev + acc, "!")).toBe("!AB");
+  });
+
+  test("2) if there is no initial value, initial accumulator is first element of array.", () => {
+    expect(array.reduce((prev, acc) => prev + acc)).toBe("AB");
+  });
+
+  test("3) if there is no element of array and initial value, return type error.", () => {
+    expect(() => [].reduce((prev) => prev)).toThrow(TypeError);
+  });
+});
+
+describe("24. Array.prototype.reduceRight", () => {
+  const array = ["A", "B"];
+
+  test("1) reduceRight is similar reduce, difference is reduceRight start last element of array.", () => {
+    expect(array.reduceRight((prev, acc) => prev + acc, "!")).toBe("!BA");
+  });
+});
+
+describe("25. Array.prototype.reverse", () => {
+  const array = ["A", "B"];
+
+  test("1) reverse method is change the original array.", () => {
+    expect(array.reverse()).toMatchObject(array);
+  });
+});
+
+describe("26. Array.prototype.shift", () => {
+  const array = ["A", "B"];
+
+  test("1) return first element and array delete first element.", () => {
+    expect(array.shift()).toBe("A");
+    expect(array).toMatchObject(["B"]);
   });
 });
