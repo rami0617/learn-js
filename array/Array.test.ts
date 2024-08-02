@@ -374,3 +374,12 @@ describe("25. Array.prototype.reverse", () => {
     expect(array.reverse()).toMatchObject(array);
   });
 });
+
+describe("26. Array.prototype.shift", () => {
+  const array = ["A", "B"];
+
+  test("1) return first element and array delete first element.", () => {
+    expect(array.shift()).toBe("A");
+    expect(array).toMatchObject(["B"]);
+  });
+});

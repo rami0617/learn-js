@@ -453,3 +453,13 @@ Array.prototype.reverse = function () {
 
   return this;
 };
+
+Array.prototype.shift = function () {
+  if (this.length === 0) return undefined;
+
+  const firstElemet = this[0];
+
+  this.splice(0, 1);
+
+  return firstElemet;
+};
