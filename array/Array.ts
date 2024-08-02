@@ -360,18 +360,18 @@ Array.prototype.lastIndexOf = function (
 };
 
 Array.prototype.map = function (
-  callBackFn: (element: any, index: number, array: any[]),
+  callBackFn: (element: any, index: number, array: any[]) => any,
   thisArg?: any
 ) {
   //map method return new array
   //dosen't use new array -> forEach, for ~ of
   //new array -> map
 
-  const result:any[] = [];
+  const result: any[] = [];
 
   for (let i = 0; i < this.length; i++) {
     //sparse array
-    if(this.hasOwnProperty(i)) {
+    if (this.hasOwnProperty(i)) {
       result.push(callBackFn.call(thisArg, this[i], i, this));
     }
   }
@@ -379,26 +379,43 @@ Array.prototype.map = function (
   return result;
 };
 
-
 Array.prototype.pop = function () {
   //if the array is empty return undeifned
   //the removed element from the array
   if (this.length === 0) return undefined;
 
-  const lastElement = this[this.length-1];
+  const lastElement = this[this.length - 1];
 
-  this.splice(this.length-1, 1);
+  this.splice(this.length - 1, 1);
 
   return lastElement;
-} 
+};
 
 Array.prototype.push = function (...element) {
   //return length of array
-  let lastIndex = this.length -1;
+  let lastIndex = this.length - 1;
 
-  for(let i = 0; i < element.length; i++) {
-    this[lastIndex + i] = element[i]
+  for (let i = 0; i < element.length; i++) {
+    this[lastIndex + i] = element[i];
   }
 
   return this.length;
-}
+};
+
+Array.prototype.reduce = function (
+  callbackFn: (accumulator, currentValue, currentIndex, array) => any,
+  initialValue?: any
+) {
+  //Thrown if the array contains no elements and initialValue is not provided
+  if (this.length === 0 && initialValue === undefined)
+    throw new TypeError("Error: Reduce of empty array with no initial value");
+
+  let newAccumulator = initialValue === undefined ? this[0] : initialValue;
+  let startIndex = initialValue === undefined ? 1 : 0;
+
+  for (let i = startIndex; i < this.length; i++) {
+    newAccumulator = callbackFn(newAccumulator, this[i], i, this);
+  }
+
+  return newAccumulator;
+};

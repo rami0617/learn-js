@@ -51,7 +51,7 @@
 20) Array.prototype.map()
 21) Array.prototype.pop()
 22) Array.prototype.push()
-23) Array.prototype.reduce()
+23) Array.prototype.reduce() //🔂
 24) Array.prototype.reduceRight()
 25) Array.prototype.reverse()
 26) Array.prototype.shift()

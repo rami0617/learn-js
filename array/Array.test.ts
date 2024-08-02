@@ -308,7 +308,7 @@ describe("20. Array.prototype.map", () => {
   });
 });
 
-describe("20. Array.prototype.pop", () => {
+describe("21. Array.prototype.pop", () => {
   const array = ["A", "B"];
   const array1 = ["C", "D"];
 
@@ -324,7 +324,7 @@ describe("20. Array.prototype.pop", () => {
   });
 });
 
-describe("21. Array.prototype.push", () => {
+describe("22. Array.prototype.push", () => {
   const array = ["A", "B"];
   const array1 = ["C", "D"];
 
@@ -340,5 +340,21 @@ describe("21. Array.prototype.push", () => {
     array1.push(...elements);
 
     expect(array1).toMatchObject(["C", "D", ...elements]);
+  });
+});
+
+describe("23. Array.prototype.reduce", () => {
+  const array = ["A", "B"];
+
+  test("1) if there is initial value, initial accumulator is initial value.", () => {
+    expect(array.reduce((prev, acc) => prev + acc, "!")).toBe("!AB");
+  });
+
+  test("2) if there is no initial value, initial accumulator is first element of array.", () => {
+    expect(array.reduce((prev, acc) => prev + acc)).toBe("AB");
+  });
+
+  test("3) if there is no element of array and initial value, return type error.", () => {
+    expect(() => [].reduce((prev) => prev)).toThrow(TypeError);
   });
 });
