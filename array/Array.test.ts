@@ -424,3 +424,19 @@ describe("29. Array.prototype.sort", () => {
     );
   });
 });
+
+describe("30. Array.prototype.splice", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) if start is 0, return emtpy array", () => {
+    const result = array.splice();
+
+    expect(result).toMatchObject([]);
+  });
+
+  test("2) splice method in-place algorithm.", () => {
+    const array1 = array;
+    array.splice(0, 1);
+    expect(array).toMatchObject(array1);
+  });
+});

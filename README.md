@@ -58,11 +58,8 @@
 27) Array.prototype.slice()
 28) Array.prototype.some()
 29) Array.prototype.sort() //🔂
-30) Array.prototype.splice()
-31) Array.prototype.toReversed()
-32) Array.prototype.toSorted()
-33) Array.prototype.toSpliced()
-34) Array.prototype.toString()
-35) Array.prototype.unshift()
-36) Array.prototype.values()
-37) Array.prototype.with()
+30) Array.prototype.splice()//🔂
+31) Array.prototype.toString()
+32) Array.prototype.unshift()
+33) Array.prototype.values()
+34) Array.prototype.with()

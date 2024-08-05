@@ -551,3 +551,43 @@ Array.prototype.sort = function (compareFn?: (a, b) => any) {
 
   return this;
 };
+
+Array.prototype.splice = function (start, deleteCount, ...items) {
+  //in place
+  //return original array - splice element
+
+  if (start === undefined) {
+    //no delete
+    return [];
+  }
+
+  let length = this.length;
+  let newStart =
+    start < 0 ? Math.max(length + start, 0) : Math.min(start, length);
+  deleteCount =
+    deleteCount === undefined
+      ? length - newStart
+      : Math.min(deleteCount, length - newStart);
+
+  let deletedItems = this.slice(newStart, newStart + deleteCount);
+
+  if (deleteCount !== items.length) {
+    if (deleteCount > items.length) {
+      for (let i = newStart + deleteCount; i < length; i++) {
+        this[i - (deleteCount - items.length)] = this[i];
+      }
+    } else {
+      for (let i = length - 1; i >= newStart + deleteCount; i--) {
+        this[i + (items.length - deleteCount)] = this[i];
+      }
+    }
+  }
+
+  for (let i = 0; i < items.length; i++) {
+    this[newStart + i] = items[i];
+  }
+
+  this.length = length - deleteCount + items.length;
+
+  return deletedItems;
+};
