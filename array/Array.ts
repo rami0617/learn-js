@@ -500,3 +500,54 @@ Array.prototype.some = function (
 
   return false;
 };
+
+Array.prototype.sort = function (compareFn?: (a, b) => any) {
+  //reference to the original array.
+  //sort in place. no copy
+
+  if (!compareFn) {
+    compareFn = function (a, b) {
+      if (a < b) -1;
+      if (a > b) 1;
+      return 0;
+    };
+  }
+
+  //merge sort
+
+  const helper = (arr1, arr2) => {
+    let i = 0;
+    let j = 0;
+    const result = [];
+
+    while (i < arr1.length && j < arr2.length) {
+      if (compareFn(arr1[i], arr2[j]) <= 0) {
+        result.push(left[i]);
+        i++;
+      } else {
+        result.push(arr2[j]);
+        j++;
+      }
+    }
+
+    return result.concat(arr1.slice(i)).concat(arr2.slice(j));
+  };
+
+  const mergeSort = (array) => {
+    if (array.length <= 1) return array;
+
+    const piviot = Math.floor(array.length / 2);
+    const left = mergeSort(array.slice(0, piviot));
+    const right = mergeSort(array.slice(mid));
+
+    return helper(left, right);
+  };
+
+  const sortedArray = mergeSort(this);
+
+  for (let i = 0; i < this.length; i++) {
+    this[i] = sortedArray[i];
+  }
+
+  return this;
+};

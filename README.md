@@ -57,7 +57,7 @@
 26) Array.prototype.shift()
 27) Array.prototype.slice()
 28) Array.prototype.some()
-29) Array.prototype.sort()
+29) Array.prototype.sort() //🔂
 30) Array.prototype.splice()
 31) Array.prototype.toReversed()
 32) Array.prototype.toSorted()

@@ -409,3 +409,18 @@ describe("28. Array.prototype.some", () => {
     expect(array.some((ele) => ele === "B")).toBeTruthy();
   });
 });
+
+describe("29. Array.prototype.sort", () => {
+  const array = [2, 3, 1, 5];
+  const array1 = array.slice();
+
+  test("1) if there is no compare function, excute default function.", () => {
+    expect(array.sort()).toEqual(
+      array1.sort((a, b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+      })
+    );
+  });
+});
