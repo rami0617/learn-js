@@ -400,3 +400,12 @@ describe("27. Array.prototype.slice", () => {
     expect(array.slice(0, 1)).toMatchObject([array[0]]);
   });
 });
+
+describe("28. Array.prototype.some", () => {
+  const array = ["A", "B"];
+
+  test("1) if at least one element in the array passes the test implemented by the provided function, return true.", () => {
+    expect(array.some((ele) => ele === "A")).toBeTruthy();
+    expect(array.some((ele) => ele === "B")).toBeTruthy();
+  });
+});

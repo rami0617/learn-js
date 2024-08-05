@@ -485,3 +485,18 @@ Array.prototype.slice = function (start?: number, end?: number) {
 
   return result;
 };
+
+Array.prototype.some = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  //return boolean
+
+  for (let i = 0; i < this.length; i++) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return true;
+    }
+  }
+
+  return false;
+};
