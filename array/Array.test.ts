@@ -383,3 +383,20 @@ describe("26. Array.prototype.shift", () => {
     expect(array).toMatchObject(["B"]);
   });
 });
+
+describe("27. Array.prototype.slice", () => {
+  const array = ["A", "B"];
+
+  test("1) if there is no args, return shallow copied original array.", () => {
+    expect(array.slice()).not.toBe(array);
+    expect(array.slice().length).toBe(array.length);
+  });
+
+  test("2) if there is start, slice from there.", () => {
+    expect(array.slice(1).length).toBe(array.length - 1);
+  });
+
+  test("3) if there is an end, it is return without including the end.", () => {
+    expect(array.slice(0, 1)).toMatchObject([array[0]]);
+  });
+});

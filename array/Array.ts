@@ -463,3 +463,25 @@ Array.prototype.shift = function () {
 
   return firstElemet;
 };
+
+Array.prototype.slice = function (start?: number, end?: number) {
+  //create new array
+  //include start, not include end
+  let newStart = start === undefined ? 0 : start;
+  let newEnd = end === undefined ? this.length : end;
+
+  newStart = newStart < 0 ? Math.max(this.length + newStart, 0) : newStart;
+  newEnd = newEnd < 0 ? Math.max(this.length + newEnd, 0) : newEnd;
+
+  newEnd = Math.min(newEnd, this.length);
+
+  if (newStart >= this.length || newEnd <= newStart) return [];
+
+  const result: any[] = [];
+
+  for (let i = newStart; i < newEnd; i++) {
+    result.push(this[i]);
+  }
+
+  return result;
+};
