@@ -383,3 +383,60 @@ describe("26. Array.prototype.shift", () => {
     expect(array).toMatchObject(["B"]);
   });
 });
+
+describe("27. Array.prototype.slice", () => {
+  const array = ["A", "B"];
+
+  test("1) if there is no args, return shallow copied original array.", () => {
+    expect(array.slice()).not.toBe(array);
+    expect(array.slice().length).toBe(array.length);
+  });
+
+  test("2) if there is start, slice from there.", () => {
+    expect(array.slice(1).length).toBe(array.length - 1);
+  });
+
+  test("3) if there is an end, it is return without including the end.", () => {
+    expect(array.slice(0, 1)).toMatchObject([array[0]]);
+  });
+});
+
+describe("28. Array.prototype.some", () => {
+  const array = ["A", "B"];
+
+  test("1) if at least one element in the array passes the test implemented by the provided function, return true.", () => {
+    expect(array.some((ele) => ele === "A")).toBeTruthy();
+    expect(array.some((ele) => ele === "B")).toBeTruthy();
+  });
+});
+
+describe("29. Array.prototype.sort", () => {
+  const array = [2, 3, 1, 5];
+  const array1 = array.slice();
+
+  test("1) if there is no compare function, excute default function.", () => {
+    expect(array.sort()).toEqual(
+      array1.sort((a, b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+      })
+    );
+  });
+});
+
+describe("30. Array.prototype.splice", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) if start is 0, return emtpy array", () => {
+    const result = array.splice();
+
+    expect(result).toMatchObject([]);
+  });
+
+  test("2) splice method in-place algorithm.", () => {
+    const array1 = array;
+    array.splice(0, 1);
+    expect(array).toMatchObject(array1);
+  });
+});

@@ -463,3 +463,131 @@ Array.prototype.shift = function () {
 
   return firstElemet;
 };
+
+Array.prototype.slice = function (start?: number, end?: number) {
+  //create new array
+  //include start, not include end
+  let newStart = start === undefined ? 0 : start;
+  let newEnd = end === undefined ? this.length : end;
+
+  newStart = newStart < 0 ? Math.max(this.length + newStart, 0) : newStart;
+  newEnd = newEnd < 0 ? Math.max(this.length + newEnd, 0) : newEnd;
+
+  newEnd = Math.min(newEnd, this.length);
+
+  if (newStart >= this.length || newEnd <= newStart) return [];
+
+  const result: any[] = [];
+
+  for (let i = newStart; i < newEnd; i++) {
+    result.push(this[i]);
+  }
+
+  return result;
+};
+
+Array.prototype.some = function (
+  callBackFn: (element: any, index: number, array: any[]) => boolean,
+  thisArg?: any
+) {
+  //return boolean
+
+  for (let i = 0; i < this.length; i++) {
+    if (callBackFn.call(thisArg, this[i], i, this)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+Array.prototype.sort = function (compareFn?: (a, b) => any) {
+  //reference to the original array.
+  //sort in place. no copy
+
+  if (!compareFn) {
+    compareFn = function (a, b) {
+      if (a < b) -1;
+      if (a > b) 1;
+      return 0;
+    };
+  }
+
+  //merge sort
+
+  const helper = (arr1, arr2) => {
+    let i = 0;
+    let j = 0;
+    const result = [];
+
+    while (i < arr1.length && j < arr2.length) {
+      if (compareFn(arr1[i], arr2[j]) <= 0) {
+        result.push(left[i]);
+        i++;
+      } else {
+        result.push(arr2[j]);
+        j++;
+      }
+    }
+
+    return result.concat(arr1.slice(i)).concat(arr2.slice(j));
+  };
+
+  const mergeSort = (array) => {
+    if (array.length <= 1) return array;
+
+    const piviot = Math.floor(array.length / 2);
+    const left = mergeSort(array.slice(0, piviot));
+    const right = mergeSort(array.slice(mid));
+
+    return helper(left, right);
+  };
+
+  const sortedArray = mergeSort(this);
+
+  for (let i = 0; i < this.length; i++) {
+    this[i] = sortedArray[i];
+  }
+
+  return this;
+};
+
+Array.prototype.splice = function (start, deleteCount, ...items) {
+  //in place
+  //return original array - splice element
+
+  if (start === undefined) {
+    //no delete
+    return [];
+  }
+
+  let length = this.length;
+  let newStart =
+    start < 0 ? Math.max(length + start, 0) : Math.min(start, length);
+  deleteCount =
+    deleteCount === undefined
+      ? length - newStart
+      : Math.min(deleteCount, length - newStart);
+
+  let deletedItems = this.slice(newStart, newStart + deleteCount);
+
+  if (deleteCount !== items.length) {
+    if (deleteCount > items.length) {
+      for (let i = newStart + deleteCount; i < length; i++) {
+        this[i - (deleteCount - items.length)] = this[i];
+      }
+    } else {
+      for (let i = length - 1; i >= newStart + deleteCount; i--) {
+        this[i + (items.length - deleteCount)] = this[i];
+      }
+    }
+  }
+
+  for (let i = 0; i < items.length; i++) {
+    this[newStart + i] = items[i];
+  }
+
+  this.length = length - deleteCount + items.length;
+
+  return deletedItems;
+};
