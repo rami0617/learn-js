@@ -440,3 +440,47 @@ describe("30. Array.prototype.splice", () => {
     expect(array).toMatchObject(array1);
   });
 });
+
+describe("31. Array.prototype.toString", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) if array is Array, return join array with comma.", () => {
+    expect(array.toString()).not.toEqual(array);
+    expect(array.toString()).toEqual(array.join(","));
+  });
+});
+
+describe("32. Array.prototype.unshift", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) if there is no element, return length of existing array.", () => {
+    expect(array.unshift()).toBe(array.length);
+  });
+
+  test("2) if there is element, return length of existing array + length of element.", () => {
+    const element = [1, 2, 3];
+    const arrayLength = array.length;
+
+    expect(array.unshift(...element)).toBe(arrayLength + element.length);
+  });
+});
+
+describe("33. Array.prototype.values", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) should return new array iterator with element of array.", () => {
+    expect(array.values().next().value).toBe(2);
+    expect(array.values()).toBeInstanceOf(
+      Object.getPrototypeOf([][Symbol.iterator]()).constructor
+    );
+  });
+});
+
+describe("34. Array.prototype.with", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) should return new array with the element at the given index replaced with the given value.", () => {
+    expect(array.with(1, 0)).toMatchObject([2, 0, 1, 5]);
+    expect(array[1]).not.toBe(0);
+  });
+});

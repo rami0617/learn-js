@@ -591,3 +591,60 @@ Array.prototype.splice = function (start, deleteCount, ...items) {
 
   return deletedItems;
 };
+
+Array.prototype.toString = function () {
+  if (this instanceof Array) {
+    return this.join(","); //return new array.
+  } else {
+    //ensure Object.prototype.toString()
+    return Object.prototype.toString.call(this);
+  }
+};
+
+Array.prototype.unshift = function (...element) {
+  //return calculated length
+  //change existing array
+
+  let temp = [...this];
+
+  for (let i = 0; i < element.length; i++) {
+    this[i] = element[i];
+  }
+
+  for (let i = 0; i < this.length; i++) {
+    this[i + element.length] = temp[i];
+  }
+
+  return this.length;
+};
+
+Array.prototype.values = function* () {
+  //return new array iterator with element of array
+
+  for (let i = 0; i < this.length; i++) {
+    yield this[i];
+  }
+};
+
+Array.prototype.with = function (index: number, value: any) {
+  //return new array
+
+  if (index >= this.length || index < -this.length)
+    throw new RangeError("Index out of range");
+
+  let newIndex = index < 0 ? index + this.length : index;
+
+  const result: any[] = [...this];
+
+  // for (let i = 0; i <= this.length; i++) {
+  //   if (i === newIndex) {
+  //     result.push(value);
+  //   } else {
+  //     result.push(this[i]);
+  //   }
+  // }
+
+  result[newIndex] = value;
+
+  return result;
+};
