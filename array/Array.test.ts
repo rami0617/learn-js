@@ -449,3 +449,18 @@ describe("31. Array.prototype.toString", () => {
     expect(array.toString()).toEqual(array.join(","));
   });
 });
+
+describe("32. Array.prototype.unshift", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) if there is no element, return length of existing array.", () => {
+    expect(array.unshift()).toBe(array.length);
+  });
+
+  test("2) if there is element, return length of existing array + length of element.", () => {
+    const element = [1, 2, 3];
+    const arrayLength = array.length;
+
+    expect(array.unshift(...element)).toBe(arrayLength + element.length);
+  });
+});

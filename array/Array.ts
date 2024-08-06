@@ -600,3 +600,20 @@ Array.prototype.toString = function () {
     return Object.prototype.toString.call(this);
   }
 };
+
+Array.prototype.unshift = function (...element) {
+  //return calculated length
+  //change existing array
+
+  let temp = [...this];
+
+  for (let i = 0; i < element.length; i++) {
+    this[i] = element[i];
+  }
+
+  for (let i = 0; i < this.length; i++) {
+    this[i + element.length] = temp[i];
+  }
+
+  return this.length;
+};
