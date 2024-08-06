@@ -1,4 +1,4 @@
-# 🟨 JS-LEARN
+# 🟨 LEARN-JS
 
 To study javascript and understand javascript built-in methods.
 
