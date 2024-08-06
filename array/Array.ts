@@ -591,3 +591,12 @@ Array.prototype.splice = function (start, deleteCount, ...items) {
 
   return deletedItems;
 };
+
+Array.prototype.toString = function () {
+  if (this instanceof Array) {
+    return this.join(","); //return new array.
+  } else {
+    //ensure Object.prototype.toString()
+    return Object.prototype.toString.call(this);
+  }
+};

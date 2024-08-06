@@ -440,3 +440,12 @@ describe("30. Array.prototype.splice", () => {
     expect(array).toMatchObject(array1);
   });
 });
+
+describe("31. Array.prototype.toString", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) if array is Array, return join array with comma.", () => {
+    expect(array.toString()).not.toEqual(array);
+    expect(array.toString()).toEqual(array.join(","));
+  });
+});
