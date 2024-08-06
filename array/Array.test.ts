@@ -464,3 +464,14 @@ describe("32. Array.prototype.unshift", () => {
     expect(array.unshift(...element)).toBe(arrayLength + element.length);
   });
 });
+
+describe("33. Array.prototype.values", () => {
+  const array = [2, 3, 1, 5];
+
+  test("1) should return new array iterator with element of array.", () => {
+    expect(array.values().next().value).toBe(2);
+    expect(array.values()).toBeInstanceOf(
+      Object.getPrototypeOf([][Symbol.iterator]()).constructor
+    );
+  });
+});

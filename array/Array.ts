@@ -617,3 +617,11 @@ Array.prototype.unshift = function (...element) {
 
   return this.length;
 };
+
+Array.prototype.values = function* () {
+  //return new array iterator with element of array
+
+  for (let i = 0; i < this.length; i++) {
+    yield this[i];
+  }
+};
