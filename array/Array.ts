@@ -625,3 +625,26 @@ Array.prototype.values = function* () {
     yield this[i];
   }
 };
+
+Array.prototype.with = function (index: number, value: any) {
+  //return new array
+
+  if (index >= this.length || index < -this.length)
+    throw new RangeError("Index out of range");
+
+  let newIndex = index < 0 ? index + this.length : index;
+
+  const result: any[] = [...this];
+
+  // for (let i = 0; i <= this.length; i++) {
+  //   if (i === newIndex) {
+  //     result.push(value);
+  //   } else {
+  //     result.push(this[i]);
+  //   }
+  // }
+
+  result[newIndex] = value;
+
+  return result;
+};
