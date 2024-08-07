@@ -1,6 +1,6 @@
 //arg : string, index
 //if the index is negative, calculate from the end of string to find the character.
-String.prototype.at = function (index: number) {
+String.prototype.at = function (index: number): string | undefined {
   //0. if index is bigger than length of string, return undefined
   if (this.length - 1 < index) return undefined;
 
@@ -32,7 +32,7 @@ String.prototype.at = function (index: number) {
   return this[newIndex];
 };
 
-String.prototype.charAt = function (index: number = 0) {
+String.prototype.charAt = function (index: number = 0): string {
   //1) if there is no arg, return first index of string
   //2) if index is bigger than legnth -1 of string, return empty string
 
@@ -41,19 +41,19 @@ String.prototype.charAt = function (index: number = 0) {
   return this[index] ?? "";
 };
 
-String.prototype.charCodeAt = function (index: number = 0) {
+String.prototype.charCodeAt = function (index: number = 0): number {
   //1) return the unicode of the string corresponding to the index of the character.
   //2) if index is undefined, we think of index is zero.
   //3) if there is index, return he string corresponding to the index of the character.
   //4) if index is not between 0 and string.length -1, return NaN.
   //4) we use unicode that String.prototype.codePointAt()
 
-  if (index < 0 || index > this.length - 1) return NaN;
+  if (index < 0 || index > this.length - 1) return NaN; //typeof NaN === number
 
   return this.codePointAt(index);
 };
 
-String.prototype.concat = function (...strings: string[]) {
+String.prototype.concat = function (...strings: string[]): string {
   //1) the length of strings must be at least one.
   //2) there is no arg, return originally string.
   //3) there is args, return originally string plus all args
@@ -67,7 +67,10 @@ String.prototype.concat = function (...strings: string[]) {
   return result;
 };
 
-String.prototype.endsWith = function (searchString: string, length?: number) {
+String.prototype.endsWith = function (
+  searchString: string,
+  length?: number
+): boolean {
   //1) if string have searchString, return true.
   //2) if string have not searchString, return false.
   //3) originally value of length is length of string.
@@ -82,7 +85,10 @@ String.prototype.endsWith = function (searchString: string, length?: number) {
   return newString[newString.length - 1] === searchString;
 };
 
-String.prototype.includes = function (searchString: string, position?: number) {
+String.prototype.includes = function (
+  searchString: string,
+  position?: number
+): boolean {
   //1) if there is searchString in string return true.
   //2) if there is no searchString in string return false.
   //3) if there is position, start searching from position of string.
@@ -101,7 +107,10 @@ String.prototype.includes = function (searchString: string, position?: number) {
   return false;
 };
 
-String.prototype.indexOf = function (searchString: string, fromIndex?: number) {
+String.prototype.indexOf = function (
+  searchString: string,
+  fromIndex?: number
+): number {
   //1) if serachString is empty, we consider searchString is undefined.
   //2) if there is searchString and there is no from index, the original string is searched.
 
@@ -132,7 +141,7 @@ String.prototype.indexOf = function (searchString: string, fromIndex?: number) {
 String.prototype.lastIndexOf = function (
   searchString: string,
   fromIndex?: number
-) {
+): number {
   //1) basic action is same indexOf.
   //2) difference is that search start is last string.
 
@@ -157,7 +166,7 @@ String.prototype.lastIndexOf = function (
   return -1;
 };
 
-String.prototype.localeCompare = function (compareString: string) {
+String.prototype.localeCompare = function (compareString: string): number {
   //only english
 
   if (this === compareString) return 0;
@@ -225,7 +234,10 @@ String.prototype.match = function (regExp: RegExp): RegExpMatchArray | null {
   }
 };
 
-String.prototype.padEnd = function (targetLength: number, fillString?: string) {
+String.prototype.padEnd = function (
+  targetLength: number,
+  fillString?: string
+): string {
   //1) if length of originally string bigger than targetLength, return originally string.
 
   if (targetLength <= this.length) {
@@ -249,7 +261,7 @@ String.prototype.padEnd = function (targetLength: number, fillString?: string) {
 String.prototype.padStart = function (
   targetLength: number,
   fillString?: string
-) {
+): string {
   //1) if length of originally string bigger than targetLength, return originally string.
 
   if (targetLength <= this.length) {
@@ -272,7 +284,7 @@ String.prototype.padStart = function (
   return newString + this;
 };
 
-String.prototype.repeat = function (count: number) {
+String.prototype.repeat = function (count: number): string {
   //1) if count is negative number, return range error.
   if (count < 0) {
     throw new RangeError(`RangeError: Invalid count value: ${count}`);
@@ -298,23 +310,23 @@ String.prototype.repeat = function (count: number) {
 };
 
 String.prototype.replace = function (
-  pattern: string | RegExp,
+  searchValue: string | RegExp,
   replacement: string
-) {
+): string {
   //not include replacer function.
 
   //1) if pattern is empty string, return replacement + string
-  if (pattern === "") return replacement + this;
+  if (searchValue === "") return replacement + this;
 
   //2) find pattern, change replacement.
 
-  if (typeof pattern === "string") {
-    const index = this.indexOf(pattern);
+  if (typeof searchValue === "string") {
+    const index = this.indexOf(searchValue);
 
     if (index === -1) return this;
 
     const beforeString = this.slice(0, index);
-    const afterString = this.slice(index + pattern.length);
+    const afterString = this.slice(index + searchValue.length);
 
     return beforeString + replacement + afterString;
   } else {
@@ -322,11 +334,11 @@ String.prototype.replace = function (
     let lastIndex = 0;
     let result = "";
 
-    while ((match = pattern.exec(this)) !== null) {
+    while ((match = searchValue.exec(this)) !== null) {
       result += this.slice(lastIndex, match.length) + replacement;
       lastIndex = match.index + match[0].length;
 
-      if (!pattern.global) break;
+      if (!searchValue.global) break;
     }
 
     result += this.slice(lastIndex);
@@ -338,7 +350,7 @@ String.prototype.replace = function (
 String.prototype.replaceAll = function (
   pattern: string | RegExp,
   replacement: string
-) {
+): string {
   if (typeof pattern === "string") {
     return this.split(pattern).join(replacement);
   } else {
@@ -346,14 +358,17 @@ String.prototype.replaceAll = function (
   }
 };
 
-String.prototype.search = function (regexp: RegExp) {
+String.prototype.search = function (regexp: RegExp): number {
   //1) find regexp, return index
   //2) if don't find regex, return -1
   //3) actual implementation comes from RegExp.prototype[@@search]().
   return regexp[Symbol.search](this);
 };
 
-String.prototype.slice = function (indexStart: number, indexEnd?: number) {
+String.prototype.slice = function (
+  indexStart: number,
+  indexEnd?: number
+): string {
   //1) if indexStart bigger or same than length of string, return empty string
 
   if (indexStart >= this.length) return "";
@@ -393,7 +408,10 @@ String.prototype.slice = function (indexStart: number, indexEnd?: number) {
   return result;
 };
 
-String.prototype.split = function (separator?: string, limit?: number) {
+String.prototype.split = function (
+  separator: string,
+  limit?: number
+): string[] {
   //Not include Regexp
   //separate string, limit number
 
@@ -404,7 +422,7 @@ String.prototype.split = function (separator?: string, limit?: number) {
 
   //'abcd'.split('') -> ['a','b','c','d']
   if (separator === "") {
-    return Array.from(this).slice(0, limit);
+    return Array.from(this as string).slice(0, limit);
   }
 
   //if length of saparator is bigger than one, separator must exactly same word.
@@ -448,7 +466,7 @@ String.prototype.split = function (separator?: string, limit?: number) {
 String.prototype.startsWith = function (
   searchString: string,
   position?: number
-) {
+): boolean {
   //searchString으로시작하면 true, 아니면 false
   const newString = this.slice(position === undefined ? 0 : position);
   const index = newString.indexOf(searchString);
@@ -456,7 +474,10 @@ String.prototype.startsWith = function (
   return index === 0;
 };
 
-String.prototype.substring = function (indexStart: number, indexEnd?: number) {
+String.prototype.substring = function (
+  indexStart: number,
+  indexEnd?: number
+): string {
   //endStart not include
 
   if (indexStart == indexEnd) {
@@ -485,7 +506,7 @@ String.prototype.substring = function (indexStart: number, indexEnd?: number) {
   return this.slice(newIndexStart, newIndexEnd);
 };
 
-String.prototype.toLowerCase = function () {
+String.prototype.toLowerCase = function (): string {
   const alphabet = {
     A: "a",
     B: "b",
@@ -524,11 +545,11 @@ String.prototype.toLowerCase = function () {
   return result;
 };
 
-String.prototype.toString = function () {
+String.prototype.toString = function (): string {
   return new String(this).valueOf();
 };
 
-String.prototype.trim = function () {
+String.prototype.trim = function (): string {
   let result = "";
   //'   Hello   world!   ' -> 'Hello   world!'
   //앞, 뒤 공백을 모두 제거함
@@ -559,6 +580,6 @@ String.prototype.trim = function () {
   return result;
 };
 
-String.prototype.valueOf = function () {
+String.prototype.valueOf = function (): string {
   return this.toString();
 };
