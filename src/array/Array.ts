@@ -1,4 +1,4 @@
-Array.prototype.at = function (index: number): string | undefined {
+Array.prototype.at = function <T>(index: number): T | undefined {
   if (index < -this.length || index >= this.length) {
     return undefined;
   }
@@ -7,8 +7,6 @@ Array.prototype.at = function (index: number): string | undefined {
 
   return this[newIndex];
 };
-
-interface ConcatArray<T> extends Array<T> {}
 
 Array.prototype.concat = function <T>(...values: (T | ConcatArray<T>)[]): T[] {
   //don't change existing array, return new array
@@ -30,11 +28,12 @@ Array.prototype.concat = function <T>(...values: (T | ConcatArray<T>)[]): T[] {
   return result;
 };
 
-Array.prototype.copyWithin = function (
+Array.prototype.copyWithin = function <T>(
+  this: T[],
   target: number,
   start: number,
   end?: number
-) {
+): T[] {
   // part of an array shallow copy and move to another position
   // don't change length of array
   // change existing array
@@ -73,7 +72,9 @@ Array.prototype.copyWithin = function (
   return this;
 };
 
-Array.prototype.entries = function* () {
+Array.prototype.entries = function* <T>(
+  this: T[]
+): IterableIterator<[number, T]> {
   //return iterator object
   //function* -> generator function
   //yield -> pause function making, return generator object
@@ -83,10 +84,11 @@ Array.prototype.entries = function* () {
   }
 };
 
-Array.prototype.every = function (
-  callBackFn: (element: any, index: number, array: any[]) => boolean,
+Array.prototype.every = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: T[]) => boolean,
   thisArg?: any
-) {
+): boolean {
   for (let i = 0; i < this.length; i++) {
     if (!callBackFn.call(thisArg, this[i], i, this)) {
       return false;
@@ -96,7 +98,12 @@ Array.prototype.every = function (
   return true;
 };
 
-Array.prototype.fill = function (value, start?: number, end?: number) {
+Array.prototype.fill = function <T>(
+  this: T[],
+  value: T,
+  start?: number,
+  end?: number
+): T[] {
   if (value === undefined) return this;
 
   //not make new array.
@@ -104,8 +111,8 @@ Array.prototype.fill = function (value, start?: number, end?: number) {
   let newStart = start === undefined ? 0 : start;
   let newEnd = end === undefined ? this.length : end;
 
-  if (newStart < 0) newStart = start + this.length;
-  if (newEnd < 0) newEnd = end + this.length;
+  if (newStart < 0) newStart = newStart + this.length;
+  if (newEnd < 0) newEnd = newEnd + this.length;
 
   newStart = Math.max(newStart, 0);
   newEnd = Math.min(newEnd, this.length);
@@ -119,10 +126,11 @@ Array.prototype.fill = function (value, start?: number, end?: number) {
   return this;
 };
 
-Array.prototype.filter = function (
-  callBackFn: (element: any, index: number, array: any[]) => boolean,
+Array.prototype.filter = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: any[]) => boolean,
   thisArg?: any
-) {
+): T[] {
   //create new array
   const result: any[] = [];
 
@@ -135,10 +143,11 @@ Array.prototype.filter = function (
   return result;
 };
 
-Array.prototype.find = function (
-  callBackFn: (element: any, index: number, array: any[]) => boolean,
+Array.prototype.find = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: any[]) => boolean,
   thisArg?: any
-) {
+): T | undefined {
   // return the first element in provided array that satisfies the provided testing function.
   // if no value satisfy the testing function, return undefined.
 
@@ -151,10 +160,11 @@ Array.prototype.find = function (
   return undefined;
 };
 
-Array.prototype.findIndex = function (
-  callBackFn: (element: any, index: number, array: any[]) => boolean,
+Array.prototype.findIndex = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: any[]) => boolean,
   thisArg?: any
-) {
+): number {
   //similar to find method
   //return index
 
@@ -167,10 +177,11 @@ Array.prototype.findIndex = function (
   return -1;
 };
 
-Array.prototype.findLast = function (
-  callBackFn: (element: any, index: number, array: any[]) => boolean,
+Array.prototype.findLast = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: any[]) => boolean,
   thisArg?: any
-) {
+): T | undefined {
   //opposite of find method
 
   for (let i = this.length - 1; i >= 0; i--) {
@@ -182,10 +193,11 @@ Array.prototype.findLast = function (
   return undefined;
 };
 
-Array.prototype.findLastIndex = function (
-  callBackFn: (element: any, index: number, array: any[]) => boolean,
+Array.prototype.findLastIndex = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: any[]) => boolean,
   thisArg?: any
-) {
+): number {
   //opposite of findIndex method.
 
   for (let i = this.length - 1; i >= 0; i--) {
@@ -197,8 +209,8 @@ Array.prototype.findLastIndex = function (
   return -1;
 };
 
-Array.prototype.flat = function (depth: number = 1) {
-  let newDepth = depth;
+Array.prototype.flat = function <T>(this: T[], depth: number): T[] {
+  let newDepth = depth === undefined ? 1 : depth;
   let newArray: any = this;
   let result: any[] = [];
 
@@ -220,13 +232,14 @@ Array.prototype.flat = function (depth: number = 1) {
   return result;
 };
 
-Array.prototype.flatMap = function (
-  callBackFn: (element: any, index: number, array: any[]) => any,
+Array.prototype.flatMap = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: any[]) => any,
   thisArg?: any
 ) {
   //similar to map().flat(1), a little more efficient
 
-  const result: any[] = [];
+  const result: T[] = [];
 
   for (let i = 0; i < this.length; i++) {
     const temp = callBackFn.call(thisArg, this[i], i, this);
@@ -241,10 +254,11 @@ Array.prototype.flatMap = function (
   return result;
 };
 
-Array.prototype.forEach = function (
-  callBackFn: (element: any, index: number, array: any[]) => any,
+Array.prototype.forEach = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: any[]) => any,
   thisArg?: any
-) {
+): void {
   for (let i = 0; i < this.length; i++) {
     //call method first arg -> thisArg
     //element -> this[i]
@@ -254,7 +268,10 @@ Array.prototype.forEach = function (
   }
 };
 
-Array.prototype.includes = function (searchElement: any, fromIndex?: number) {
+Array.prototype.includes = function <T>(
+  searchElement: T,
+  fromIndex?: number
+): boolean {
   let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
 
   if (newFromIndex < 0) {
@@ -274,7 +291,10 @@ Array.prototype.includes = function (searchElement: any, fromIndex?: number) {
   return false;
 };
 
-Array.prototype.indexOf = function (searchElement: any, fromIndex?: number) {
+Array.prototype.indexOf = function <T>(
+  searchElement: T,
+  fromIndex?: number
+): number {
   let newFromIndex = undefined === fromIndex ? 0 : fromIndex;
 
   if (newFromIndex < 0) {
@@ -294,7 +314,10 @@ Array.prototype.indexOf = function (searchElement: any, fromIndex?: number) {
   return -1;
 };
 
-Array.prototype.join = function (separator: string = ",") {
+Array.prototype.join = function <T>(
+  this: T[],
+  separator: string = ","
+): string {
   if (this.length === 0) return "";
 
   let result = "";
@@ -329,7 +352,7 @@ Array.prototype.join = function (separator: string = ",") {
   return result;
 };
 
-Array.prototype.keys = function* () {
+Array.prototype.keys = function* <T>(this: T[]): IterableIterator<number> {
   //return new array iterator
   //create key,so return index
 
@@ -338,16 +361,17 @@ Array.prototype.keys = function* () {
   }
 };
 
-Array.prototype.lastIndexOf = function (
-  searchElement: any,
+Array.prototype.lastIndexOf = function <T>(
+  this: T[],
+  searchElement: T,
   fromIndex?: number
-) {
+): number {
   if (Object.is(searchElement, NaN)) return -1;
   //searches from the alst index and returns the first element equal to searchElement
   let newFromIndex = fromIndex === undefined ? this.length - 1 : fromIndex;
 
   if (newFromIndex < 0) {
-    newFromIndex = Math.max(this.length + fromIndex, 0);
+    newFromIndex = Math.max(this.length + newFromIndex, 0);
   }
 
   for (let i = newFromIndex; i >= 0; i--) {
@@ -359,15 +383,16 @@ Array.prototype.lastIndexOf = function (
   return -1;
 };
 
-Array.prototype.map = function (
-  callBackFn: (element: any, index: number, array: any[]) => any,
+Array.prototype.map = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: T[]) => any,
   thisArg?: any
-) {
+): T[] {
   //map method return new array
   //dosen't use new array -> forEach, for ~ of
   //new array -> map
 
-  const result: any[] = [];
+  const result: T[] = [];
 
   for (let i = 0; i < this.length; i++) {
     //sparse array
@@ -379,7 +404,7 @@ Array.prototype.map = function (
   return result;
 };
 
-Array.prototype.pop = function () {
+Array.prototype.pop = function <T>(this: T[]): T | undefined {
   //if the array is empty return undeifned
   //the removed element from the array
   if (this.length === 0) return undefined;
@@ -391,7 +416,7 @@ Array.prototype.pop = function () {
   return lastElement;
 };
 
-Array.prototype.push = function (...element) {
+Array.prototype.push = function <T>(this: T[], ...element: T[]): number {
   //return length of array
   let lastIndex = this.length - 1;
 
@@ -402,10 +427,16 @@ Array.prototype.push = function (...element) {
   return this.length;
 };
 
-Array.prototype.reduce = function (
-  callbackFn: (accumulator, currentValue, currentIndex, array) => any,
-  initialValue?: any
-) {
+Array.prototype.reduce = function <T>(
+  this: T[],
+  callbackFn: (
+    accumulator: T,
+    currentValue: T,
+    currentIndex: number,
+    array: T[]
+  ) => any,
+  initialValue?: T
+): T {
   //Thrown if the array contains no elements and initialValue is not provided
   if (this.length === 0 && initialValue === undefined)
     throw new TypeError("Error: Reduce of empty array with no initial value");
@@ -420,10 +451,16 @@ Array.prototype.reduce = function (
   return newAccumulator;
 };
 
-Array.prototype.reduceRight = function (
-  callbackFn: (accumulator, currentValue, currentIndex, array) => any,
-  initialValue?: any
-) {
+Array.prototype.reduceRight = function <T>(
+  this: T[],
+  callbackFn: (
+    accumulator: T,
+    currentValue: T,
+    currentIndex: number,
+    array: T[]
+  ) => any,
+  initialValue?: T
+): T {
   //Thrown if the array contains no elements and initialValue is not provided
   if (this.length === 0 && initialValue === undefined)
     throw new TypeError("Error: Reduce of empty array with no initial value");
@@ -442,7 +479,7 @@ Array.prototype.reduceRight = function (
   return newAccumulator;
 };
 
-Array.prototype.reverse = function () {
+Array.prototype.reverse = function <T>(this: T[]): T[] {
   //reverse is change the original array.
 
   for (let i = 0; i < Math.floor(this.length / 2); i++) {
@@ -454,7 +491,7 @@ Array.prototype.reverse = function () {
   return this;
 };
 
-Array.prototype.shift = function () {
+Array.prototype.shift = function (): string | undefined {
   if (this.length === 0) return undefined;
 
   const firstElemet = this[0];
@@ -464,7 +501,7 @@ Array.prototype.shift = function () {
   return firstElemet;
 };
 
-Array.prototype.slice = function (start?: number, end?: number) {
+Array.prototype.slice = function <T>(start?: number, end?: number): T[] {
   //create new array
   //include start, not include end
   let newStart = start === undefined ? 0 : start;
@@ -486,10 +523,11 @@ Array.prototype.slice = function (start?: number, end?: number) {
   return result;
 };
 
-Array.prototype.some = function (
-  callBackFn: (element: any, index: number, array: any[]) => boolean,
+Array.prototype.some = function <T>(
+  this: T[],
+  callBackFn: (element: T, index: number, array: T[]) => boolean,
   thisArg?: any
-) {
+): boolean {
   //return boolean
 
   for (let i = 0; i < this.length; i++) {
@@ -501,7 +539,10 @@ Array.prototype.some = function (
   return false;
 };
 
-Array.prototype.sort = function (compareFn?: (a, b) => any) {
+Array.prototype.sort = function <T>(
+  this: T[],
+  compareFn?: (a: T, b: T) => any
+): T[] {
   //reference to the original array.
   //sort in place. no copy
 
@@ -515,14 +556,14 @@ Array.prototype.sort = function (compareFn?: (a, b) => any) {
 
   //merge sort
 
-  const helper = (arr1, arr2) => {
+  const helper = (arr1, arr2, func) => {
     let i = 0;
     let j = 0;
-    const result = [];
+    const result: T[] = [];
 
     while (i < arr1.length && j < arr2.length) {
-      if (compareFn(arr1[i], arr2[j]) <= 0) {
-        result.push(left[i]);
+      if (func(arr1[i], arr2[j]) <= 0) {
+        result.push(arr1[i]);
         i++;
       } else {
         result.push(arr2[j]);
@@ -538,9 +579,9 @@ Array.prototype.sort = function (compareFn?: (a, b) => any) {
 
     const piviot = Math.floor(array.length / 2);
     const left = mergeSort(array.slice(0, piviot));
-    const right = mergeSort(array.slice(mid));
+    const right = mergeSort(array.slice(piviot));
 
-    return helper(left, right);
+    return helper(left, right, compareFn);
   };
 
   const sortedArray = mergeSort(this);
@@ -552,7 +593,11 @@ Array.prototype.sort = function (compareFn?: (a, b) => any) {
   return this;
 };
 
-Array.prototype.splice = function (start, deleteCount, ...items) {
+Array.prototype.splice = function <T>(
+  start: number,
+  deleteCount?: number,
+  ...items
+): T[] {
   //in place
   //return original array - splice element
 
@@ -592,7 +637,7 @@ Array.prototype.splice = function (start, deleteCount, ...items) {
   return deletedItems;
 };
 
-Array.prototype.toString = function () {
+Array.prototype.toString = function (): string {
   if (this instanceof Array) {
     return this.join(","); //return new array.
   } else {
@@ -601,7 +646,7 @@ Array.prototype.toString = function () {
   }
 };
 
-Array.prototype.unshift = function (...element) {
+Array.prototype.unshift = function <T>(this: T[], ...element: T[]): number {
   //return calculated length
   //change existing array
 
@@ -618,7 +663,7 @@ Array.prototype.unshift = function (...element) {
   return this.length;
 };
 
-Array.prototype.values = function* () {
+Array.prototype.values = function* <T>(): IterableIterator<T> {
   //return new array iterator with element of array
 
   for (let i = 0; i < this.length; i++) {
@@ -626,7 +671,7 @@ Array.prototype.values = function* () {
   }
 };
 
-Array.prototype.with = function (index: number, value: any) {
+Array.prototype.with = function <T>(index: number, value: T): T[] {
   //return new array
 
   if (index >= this.length || index < -this.length)
