@@ -67,3 +67,12 @@ To study javascript and understand javascript built-in methods.
 - Array.prototype.unshift()
 - Array.prototype.values()
 - Array.prototype.with()
+
+### Object
+
+- Object.prototype.hasOwnProperty()
+- Object.prototype.isPrototypeOf()
+- Object.prototype.propertyIsEnumerable()
+- Object.prototype.toLocaleString()
+- Object.prototype.toString()
+- Object.prototype.valueOf()
