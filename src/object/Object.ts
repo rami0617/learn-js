@@ -6,7 +6,7 @@ Object.prototype.hasOwnProperty = function (
     ...Object.getOwnPropertySymbols(this),
   ];
 
-  if (keys.includes(prop)) {
+  if (keys.includes(prop as string)) {
     return true;
   }
 
@@ -18,7 +18,27 @@ Object.prototype.hasOwnProperty = function (
       ...Object.getOwnPropertySymbols(proto),
     ];
 
-    if (protoProps.includes(prop)) {
+    if (protoProps.includes(prop as string)) {
+      return true;
+    }
+
+    proto = Object.getPrototypeOf(proto);
+  }
+
+  return false;
+};
+
+Object.prototype.isPrototypeOf = function (object: Object): boolean {
+  if (this === null || this === undefined) {
+    throw new TypeError(
+      "'Cannot read property 'isPrototypeOf' of null or undefined'"
+    );
+  }
+
+  let proto = Object.getPrototypeOf(object);
+
+  while (proto !== null) {
+    if (proto === this) {
       return true;
     }
 

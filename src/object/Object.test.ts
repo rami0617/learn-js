@@ -6,3 +6,22 @@ describe("1. Object.prototype.hasOwnProperty", () => {
     expect(object.hasOwnProperty("b")).toBeTruthy();
   });
 });
+
+describe("2. Object.prototype.isPrototypeOf", () => {
+  function Parent() {}
+  function Child() {}
+  function Neighbor() {}
+
+  Child.prototype = Object.create(Parent.prototype);
+
+  const childInstance = new Child();
+
+  test("1) should return true if the object is in the prototype chain.", () => {
+    expect(Parent.prototype.isPrototypeOf(childInstance)).toBeTruthy();
+    expect(Child.prototype.isPrototypeOf(childInstance)).toBeTruthy();
+  });
+
+  test("2) should return false if the object is in the prototype chain.", () => {
+    expect(Neighbor.prototype.isPrototypeOf(childInstance)).toBeFalsy();
+  });
+});
