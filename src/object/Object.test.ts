@@ -25,3 +25,25 @@ describe("2. Object.prototype.isPrototypeOf", () => {
     expect(Neighbor.prototype.isPrototypeOf(childInstance)).toBeFalsy();
   });
 });
+
+describe("3. Object.prototype.propertyIsEnumerable", () => {
+  test("1) should return true for an enumerable own property.", () => {
+    const object = {
+      hello: "world",
+      a: { b: "c" },
+    };
+
+    expect(object.propertyIsEnumerable("hello")).toBeTruthy();
+    expect(object.propertyIsEnumerable("a")).toBeTruthy();
+  });
+
+  test("2) should return false for a non-enumerable own property.", () => {
+    const object = {};
+    Object.defineProperty(object, "a", {
+      value: 1,
+      emurable: false,
+    });
+
+    expect(object.propertyIsEnumerable("a")).toBeFalsy();
+  });
+});

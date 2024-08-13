@@ -1,12 +1,12 @@
 Object.prototype.hasOwnProperty = function (
-  prop: string | Symbol | number
+  prop: string | symbol | number
 ): boolean {
   const keys = [
     ...Object.getOwnPropertyNames(this),
     ...Object.getOwnPropertySymbols(this),
   ];
 
-  if (keys.includes(prop as string)) {
+  if (keys.includes(prop)) {
     return true;
   }
 
@@ -18,7 +18,7 @@ Object.prototype.hasOwnProperty = function (
       ...Object.getOwnPropertySymbols(proto),
     ];
 
-    if (protoProps.includes(prop as string)) {
+    if (protoProps.includes(prop)) {
       return true;
     }
 
@@ -46,4 +46,10 @@ Object.prototype.isPrototypeOf = function (object: Object): boolean {
   }
 
   return false;
+};
+
+Object.prototype.propertyIsEnumerable = function (
+  prop: string | number | symbol
+): boolean {
+  return Object.getOwnPropertyDescriptor(this, prop)?.enumerable ?? false;
 };
