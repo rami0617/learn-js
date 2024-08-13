@@ -39,6 +39,7 @@ describe("3. Object.prototype.propertyIsEnumerable", () => {
 
   test("2) should return false for a non-enumerable own property.", () => {
     const object = {};
+
     Object.defineProperty(object, "a", {
       value: 1,
       emurable: false,

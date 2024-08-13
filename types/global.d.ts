@@ -109,3 +109,9 @@ interface Array<T> {
   values(): IterableIterator<T>;
   with(index: number, value: T): T[];
 }
+
+interface Object {
+  hasOwnProperty(prop: string | symbol | number): boolean;
+  isPrototypeOf(object: Object): boolean;
+  propertyIsEnumerable(prop: string | number | symbol): boolean;
+}

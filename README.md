@@ -73,6 +73,3 @@ To study javascript and understand javascript built-in methods.
 - Object.prototype.hasOwnProperty()
 - Object.prototype.isPrototypeOf()
 - Object.prototype.propertyIsEnumerable()
-- Object.prototype.toLocaleString()
-- Object.prototype.toString()
-- Object.prototype.valueOf()
