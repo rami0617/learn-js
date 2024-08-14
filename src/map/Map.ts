@@ -41,3 +41,13 @@ Map.prototype.get = function (key) {
 
   return undefined;
 };
+
+Map.prototype.has = function (key) {
+  for (const [mapKey, _] of this) {
+    if (key === mapKey) {
+      return true;
+    }
+  }
+
+  return false;
+};

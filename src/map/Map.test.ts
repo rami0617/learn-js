@@ -68,3 +68,17 @@ describe("5. Map.prototype.get", () => {
     expect(map.get("ohoh")).toBeUndefined();
   });
 });
+
+describe("6. Map.prototype.has", () => {
+  const map = new Map();
+  map.set("hello", 1);
+  map.set("world", 2);
+
+  test("1) should return true if an element with the specified key exists in the Map object.", () => {
+    expect(map.has("hello")).toBeTruthy();
+  });
+
+  test("1) should return false if an element with the specified key not exists in the Map object.", () => {
+    expect(map.has("ohoh")).toBeFalsy();
+  });
+});
