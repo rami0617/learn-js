@@ -1,7 +1,7 @@
 describe("1. Map.prototype.clear", () => {
   const map = new Map();
   map.set("hello", 1);
-  map.set("wolrd", 2);
+  map.set("world", 2);
 
   test("1) should removes all elements from this map.", () => {
     map.clear();
@@ -14,13 +14,13 @@ describe("1. Map.prototype.clear", () => {
 describe("2. Map.prototype.delete", () => {
   const map = new Map();
   map.set("hello", 1);
-  map.set("wolrd", 2);
+  map.set("world", 2);
 
   test("1) should removes specific element from this map.", () => {
     map.delete("hello");
 
     expect(map.has("hello")).toBeFalsy();
-    expect(map.has("wolrd")).toBeTruthy();
+    expect(map.has("world")).toBeTruthy();
     expect(map.size).toBe(1);
   });
 });
@@ -28,7 +28,7 @@ describe("2. Map.prototype.delete", () => {
 describe("3. Map.prototype.entries", () => {
   const map = new Map();
   map.set("hello", 1);
-  map.set("wolrd", 2);
+  map.set("world", 2);
 
   test("1) should return new map iterator object that contains the [key, value] pairs.", () => {
     const iteratorObjectMap = map.entries();
@@ -38,7 +38,7 @@ describe("3. Map.prototype.entries", () => {
       done: false,
     });
     expect(iteratorObjectMap.next()).toEqual({
-      value: ["wolrd", 2],
+      value: ["world", 2],
       done: false,
     });
   });
@@ -47,9 +47,24 @@ describe("3. Map.prototype.entries", () => {
 describe("4. Map.prototype.forEach", () => {
   const map = new Map();
   map.set("hello", 1);
-  map.set("wolrd", 2);
+  map.set("world", 2);
 
   test("1) should return undefined.", () => {
     expect(map.forEach((ele) => ele === ele + "1")).toBeUndefined();
+  });
+});
+
+describe("5. Map.prototype.get", () => {
+  const map = new Map();
+  map.set("hello", 1);
+  map.set("world", 2);
+
+  test("1) should return a specified element from this map.", () => {
+    expect(map.get("hello")).toBe(1);
+    expect(map.get("world")).toBe(2);
+  });
+
+  test("2) should return undefined if the key can't be found in the Map object.", () => {
+    expect(map.get("ohoh")).toBeUndefined();
   });
 });

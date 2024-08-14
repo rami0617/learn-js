@@ -31,3 +31,13 @@ Map.prototype.forEach = function (
     callbackFn.call(thisArg, value, key, this);
   }
 };
+
+Map.prototype.get = function (key) {
+  for (const [mapKey, mapValue] of this) {
+    if (key === mapKey) {
+      return mapValue;
+    }
+  }
+
+  return undefined;
+};
