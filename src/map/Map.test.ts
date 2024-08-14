@@ -82,3 +82,16 @@ describe("6. Map.prototype.has", () => {
     expect(map.has("ohoh")).toBeFalsy();
   });
 });
+
+describe("7. Map.prototype.keys", () => {
+  const map = new Map();
+  map.set("hello", 1);
+  map.set("world", 2);
+
+  const mapIterator = map.keys();
+
+  test("1) should return new map iterator object that contains the keys for each element in this map in insertion order.", () => {
+    expect(mapIterator.next().value).toBe("hello");
+    expect(mapIterator.next().value).toBe("world");
+  });
+});
