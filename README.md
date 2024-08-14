@@ -86,3 +86,21 @@ The method is different from the one implemented in the actual JavaScript engine
 - Map.prototype.keys()
 - Map.prototype.values()
 - Map.prototype.set()
+
+### Set
+
+- Set.prototype.add()
+- Set.prototype.clear()
+- Set.prototype.delete()
+- Set.prototype.difference()
+- Set.prototype.entries()
+- Set.prototype.forEach()
+- Set.prototype.has()
+- Set.prototype.intersection()
+- Set.prototype.isDisjointFrom()
+- Set.prototype.isSubsetOf()
+- Set.prototype.isSupersetOf()
+- Set.prototype.keys()
+- Set.prototype.symmetricDifference()
+- Set.prototype.union()
+- Set.prototype.values()
