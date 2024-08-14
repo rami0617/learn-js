@@ -31,13 +31,25 @@ describe("3. Map.prototype.entries", () => {
   map.set("wolrd", 2);
 
   test("1) should return new map iterator object that contains the [key, value] pairs.", () => {
-    expect(map.entries().next()).toEqual({
+    const iteratorObjectMap = map.entries();
+
+    expect(iteratorObjectMap.next()).toEqual({
       value: ["hello", 1],
       done: false,
     });
-    expect(map.entries().next()).toEqual({
+    expect(iteratorObjectMap.next()).toEqual({
       value: ["wolrd", 2],
       done: false,
     });
+  });
+});
+
+describe("4. Map.prototype.forEach", () => {
+  const map = new Map();
+  map.set("hello", 1);
+  map.set("wolrd", 2);
+
+  test("1) should return undefined.", () => {
+    expect(map.forEach((ele) => ele === ele + "1")).toBeUndefined();
   });
 });

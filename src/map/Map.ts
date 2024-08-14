@@ -18,7 +18,16 @@ Map.prototype.delete = function (key): boolean {
 };
 
 Map.prototype.entries = function* () {
-  for (const key in this) {
-    yield [key, this[key]];
+  for (const [key, value] of this) {
+    yield [key, value];
+  }
+};
+
+Map.prototype.forEach = function (
+  callbackFn: (value, key, map) => void,
+  thisArg
+) {
+  for (const [key, value] of this) {
+    callbackFn.call(thisArg, value, key, this);
   }
 };
