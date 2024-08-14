@@ -108,3 +108,21 @@ describe("8. Map.prototype.values", () => {
     expect(mapIterator.next().value).toBe(2);
   });
 });
+
+describe("9. Map.prototype.set", () => {
+  const map = new Map();
+  map.set("hello", 1);
+  map.set("world", 2);
+
+  test("1) should add an entry in this map with a specified key and a value", () => {
+    expect(map.get("hello")).toBe(1);
+    expect(map.get("world")).toBe(2);
+  });
+
+  test("2) should update an entry in this map with a specified key and a value", () => {
+    map.set("world", 3);
+
+    expect(map.get("hello")).toBe(1);
+    expect(map.get("world")).toBe(3);
+  });
+});

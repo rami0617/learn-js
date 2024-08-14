@@ -63,3 +63,9 @@ Map.prototype.values = function* () {
     yield value;
   }
 };
+
+Map.prototype.set = function (key, value) {
+  this[key] = value;
+
+  return this;
+};
