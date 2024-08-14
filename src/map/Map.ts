@@ -16,3 +16,9 @@ Map.prototype.delete = function (key): boolean {
 
   return false;
 };
+
+Map.prototype.entries = function* () {
+  for (const key in this) {
+    yield [key, this[key]];
+  }
+};

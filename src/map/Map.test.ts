@@ -24,3 +24,20 @@ describe("2. Map.prototype.delete", () => {
     expect(map.size).toBe(1);
   });
 });
+
+describe("3. Map.prototype.entries", () => {
+  const map = new Map();
+  map.set("hello", 1);
+  map.set("wolrd", 2);
+
+  test("1) should return new map iterator object that contains the [key, value] pairs.", () => {
+    expect(map.entries().next()).toEqual({
+      value: ["hello", 1],
+      done: false,
+    });
+    expect(map.entries().next()).toEqual({
+      value: ["wolrd", 2],
+      done: false,
+    });
+  });
+});
