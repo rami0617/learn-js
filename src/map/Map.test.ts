@@ -95,3 +95,16 @@ describe("7. Map.prototype.keys", () => {
     expect(mapIterator.next().value).toBe("world");
   });
 });
+
+describe("8. Map.prototype.values", () => {
+  const map = new Map();
+  map.set("hello", 1);
+  map.set("world", 2);
+
+  const mapIterator = map.values();
+
+  test("1) should return new map iterator object that contains the values for each element in this map in insertion order.", () => {
+    expect(mapIterator.next().value).toBe(1);
+    expect(mapIterator.next().value).toBe(2);
+  });
+});

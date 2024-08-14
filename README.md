@@ -83,5 +83,5 @@ To study javascript and understand javascript built-in methods.
 - Map.prototype.get()
 - Map.prototype.has()
 - Map.prototype.keys()
-- Map.prototype.set()
 - Map.prototype.values()
+- Map.prototype.set()

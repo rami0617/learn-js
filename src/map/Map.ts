@@ -57,3 +57,9 @@ Map.prototype.keys = function* () {
     yield key;
   }
 };
+
+Map.prototype.values = function* () {
+  for (const [_, value] of this) {
+    yield value;
+  }
+};
