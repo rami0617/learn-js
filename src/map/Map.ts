@@ -5,3 +5,14 @@ Map.prototype.clear = function (): void {
     this.delete(key);
   }
 };
+
+Map.prototype.delete = function (key): boolean {
+  if (this.has(key)) {
+    delete this[key];
+    this.size--;
+
+    return true;
+  }
+
+  return false;
+};
