@@ -1,7 +1,7 @@
 # 🟨 LEARN-JS
 
 To study javascript and understand javascript built-in methods.
-The method is different from the one implemented in the actual JavaScript engine.
+The method is different from the one implemented in the actual JavaScript.
 
 ## Javascript Method
 
