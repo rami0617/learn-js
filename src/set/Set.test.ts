@@ -1,7 +1,7 @@
 describe("1. Set.prototype.add", () => {
   const set = new Set();
 
-  test("1) should inserts a new element with a specified value in to this set, ", () => {
+  test("1) should inserts a new element with a specified value in to this set.", () => {
     set.add(1);
 
     expect(set.has(1)).toBeTruthy();
@@ -13,5 +13,18 @@ describe("1. Set.prototype.add", () => {
     set.add(1);
 
     expect(set.size).not.toBe(2);
+  });
+});
+
+describe("2. Set.prototype.clear", () => {
+  const set = new Set();
+
+  set.add(1);
+
+  test("1) should removes all elements from this set.", () => {
+    set.clear();
+
+    expect(set.has(1)).toBeFalsy();
+    expect(set.size).toBe(0);
   });
 });
