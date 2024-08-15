@@ -11,3 +11,15 @@ Set.prototype.add = function (value) {
 Set.prototype.clear = function (): void {
   this.item = [];
 };
+
+Set.prototype.delete = function (value): boolean {
+  const index = this.item.indexOf(value);
+
+  if (index !== -1) {
+    this.items.splice(index, 1);
+
+    return true;
+  }
+
+  return false;
+};

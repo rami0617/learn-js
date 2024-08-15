@@ -28,3 +28,17 @@ describe("2. Set.prototype.clear", () => {
     expect(set.size).toBe(0);
   });
 });
+
+describe("3. Set.prototype.delete", () => {
+  const set = new Set();
+
+  set.add(1);
+  set.add(2);
+
+  test("1) should removes a specified value from this set.", () => {
+    set.delete(1);
+
+    expect(set.size).toBe(1);
+    expect(set.has(1)).not.toBeTruthy();
+  });
+});
