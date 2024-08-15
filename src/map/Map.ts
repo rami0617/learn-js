@@ -6,7 +6,7 @@ Map.prototype.clear = function (): void {
   }
 };
 
-Map.prototype.delete = function (key): boolean {
+Map.prototype.delete = function <K>(key: K): boolean {
   if (this.has(key)) {
     delete this[key];
     this.size--;
@@ -17,22 +17,22 @@ Map.prototype.delete = function (key): boolean {
   return false;
 };
 
-Map.prototype.entries = function* () {
+Map.prototype.entries = function* <K, V>(): IterableIterator<[K, V]> {
   for (const [key, value] of this) {
     yield [key, value];
   }
 };
 
-Map.prototype.forEach = function (
-  callbackFn: (value, key, map) => void,
-  thisArg
+Map.prototype.forEach = function <K, V>(
+  callbackFn: (value: V, key: K, map: Map<K, V>) => void,
+  thisArg?: any
 ) {
   for (const [key, value] of this) {
     callbackFn.call(thisArg, value, key, this);
   }
 };
 
-Map.prototype.get = function (key) {
+Map.prototype.get = function <K, V>(key: K): V | undefined {
   for (const [mapKey, mapValue] of this) {
     if (key === mapKey) {
       return mapValue;
@@ -42,7 +42,7 @@ Map.prototype.get = function (key) {
   return undefined;
 };
 
-Map.prototype.has = function (key) {
+Map.prototype.has = function <K>(key: K): boolean {
   for (const mapKey of this) {
     if (key === mapKey) {
       return true;
@@ -52,19 +52,19 @@ Map.prototype.has = function (key) {
   return false;
 };
 
-Map.prototype.keys = function* () {
+Map.prototype.keys = function* <K>(): IterableIterator<K> {
   for (const key of this) {
     yield key;
   }
 };
 
-Map.prototype.values = function* () {
+Map.prototype.values = function* <V>(): IterableIterator<V> {
   for (const [_, value] of this) {
     yield value;
   }
 };
 
-Map.prototype.set = function (key, value) {
+Map.prototype.set = function <K, V>(key: K, value: V): Map<K, V> {
   this[key] = value;
 
   return this;

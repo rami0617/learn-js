@@ -115,3 +115,18 @@ interface Object {
   isPrototypeOf(object: Object): boolean;
   propertyIsEnumerable(prop: string | number | symbol): boolean;
 }
+
+interface Map<K, V> {
+  clear(): void;
+  delete(key: K): boolean;
+  entries(): IterableIterator<[K, V]>;
+  forEach(
+    callbackFn: (value: V, key: K, map: Map<K, V>) => void,
+    thisArg?: any
+  ): void;
+  get(key: K): V | undefined;
+  has(key: K): boolean;
+  keys(): IterableIterator<K>;
+  values(): IterableIterator<V>;
+  set(key: K, value: V): Map<K, V>;
+}
