@@ -42,3 +42,17 @@ describe("3. Set.prototype.delete", () => {
     expect(set.has(1)).not.toBeTruthy();
   });
 });
+
+describe("4. Set.prototype.difference", () => {
+  const set = new Set();
+
+  set.add(1);
+  set.add(2);
+
+  test.skip("1) should takes a set and returns a new set containing elements in this set but not in the given set.", () => {
+    const otherSet = new Set().add(1);
+    const newSet = new Set().add(2);
+
+    expect(set.difference(otherSet)).toBe(newSet);
+  });
+});

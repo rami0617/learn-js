@@ -23,3 +23,15 @@ Set.prototype.delete = function (value): boolean {
 
   return false;
 };
+
+Set.prototype.difference = function (other) {
+  const newSet = new Set();
+
+  for (let i = 0; i < this.length; i++) {
+    if (!other.has(this[i])) {
+      newSet.add(this[i]);
+    }
+  }
+
+  return newSet;
+};
