@@ -50,3 +50,13 @@ Set.prototype.forEach = function (
     callbackFn.call(thisArg, value, key, this);
   }
 };
+
+Set.prototype.has = function (value) {
+  for (const [setKey, setValue] of this) {
+    if (value === setValue) {
+      return true;
+    }
+  }
+
+  return false;
+};

@@ -75,3 +75,16 @@ describe("6. Set.prototype.forEach", () => {
     expect(set.forEach((value) => value)).toBeUndefined();
   });
 });
+
+describe("7. Set.prototype.has", () => {
+  const set = new Set();
+  set.add(1);
+
+  test("1) should return true if an element with sepcified value exists in Set object.", () => {
+    expect(set.has(1)).toBeTruthy();
+  });
+
+  test("1) should return false if an element with sepcified value not exists in Set object.", () => {
+    expect(set.has(2)).toBeFalsy();
+  });
+});
