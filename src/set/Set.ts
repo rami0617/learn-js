@@ -35,3 +35,9 @@ Set.prototype.difference = function (other) {
 
   return newSet;
 };
+
+Set.prototype.entries = function* () {
+  for (const [_, value] of this) {
+    yield [value, value];
+  }
+};

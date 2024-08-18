@@ -56,3 +56,14 @@ describe("4. Set.prototype.difference", () => {
     expect(set.difference(otherSet)).toBe(newSet);
   });
 });
+
+describe("5. Set.prototype.entries", () => {
+  const set = new Set();
+
+  set.add(1);
+  set.add(2);
+
+  test("1) should return new iterator object.", () => {
+    expect(set.entries().next().value).toMatchObject([1, 1]);
+  });
+});
