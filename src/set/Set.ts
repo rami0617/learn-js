@@ -64,11 +64,21 @@ Set.prototype.has = function (value) {
 Set.prototype.intersection = function (other) {
   const result = new Set();
 
-  for (const [key, value] of other) {
+  for (const [_, value] of other) {
     if (this.has(value)) {
       result.add(value);
     }
   }
 
   return result;
+};
+
+Set.prototype.isDisjointFrom = function (other) {
+  for (const [_, value] of other) {
+    if (this.has(value)) {
+      return false;
+    }
+  }
+
+  return true;
 };

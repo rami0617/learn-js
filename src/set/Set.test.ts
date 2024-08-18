@@ -101,3 +101,22 @@ describe("8. Set.prototype.intersection", () => {
     expect(set.intersection(other)).toBe(new Set().add(1));
   });
 });
+
+describe("9. Set.prototype.isDisjointFrom", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test.skip("1) should return true if this set has no elements in common with the other set.", () => {
+    const other = new Set();
+
+    expect(set.isDisjointFrom(other)).toBeTruthy();
+  });
+
+  test.skip("2) should return false if this set has elements in common with the other set.", () => {
+    const other = new Set();
+    other.add(1);
+
+    expect(set.isDisjointFrom(other)).toBeFalsy();
+  });
+});
