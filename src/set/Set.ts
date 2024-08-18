@@ -60,3 +60,15 @@ Set.prototype.has = function (value) {
 
   return false;
 };
+
+Set.prototype.intersection = function (other) {
+  const result = new Set();
+
+  for (const [key, value] of other) {
+    if (this.has(value)) {
+      result.add(value);
+    }
+  }
+
+  return result;
+};

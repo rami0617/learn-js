@@ -84,7 +84,20 @@ describe("7. Set.prototype.has", () => {
     expect(set.has(1)).toBeTruthy();
   });
 
-  test("1) should return false if an element with sepcified value not exists in Set object.", () => {
+  test("2) should return false if an element with sepcified value not exists in Set object.", () => {
     expect(set.has(2)).toBeFalsy();
+  });
+});
+
+describe("8. Set.prototype.intersection", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test.skip("1) should return new Set Object containing element in both this set and the other set.", () => {
+    const other = new Set();
+    other.add(1);
+
+    expect(set.intersection(other)).toBe(new Set().add(1));
   });
 });
