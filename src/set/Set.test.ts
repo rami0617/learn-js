@@ -67,3 +67,11 @@ describe("5. Set.prototype.entries", () => {
     expect(set.entries().next().value).toMatchObject([1, 1]);
   });
 });
+
+describe("6. Set.prototype.forEach", () => {
+  const set = new Set();
+
+  test("1) should return undefined", () => {
+    expect(set.forEach((value) => value)).toBeUndefined();
+  });
+});

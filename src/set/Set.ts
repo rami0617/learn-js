@@ -41,3 +41,12 @@ Set.prototype.entries = function* () {
     yield [value, value];
   }
 };
+
+Set.prototype.forEach = function (
+  callbackFn: (value, key, set) => void,
+  thisArg?: any
+) {
+  for (const [key, value] of this) {
+    callbackFn.call(thisArg, value, key, this);
+  }
+};
