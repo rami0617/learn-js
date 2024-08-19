@@ -161,3 +161,13 @@ describe("11. Set.prototype.isSupersetOf", () => {
     expect(other.isSupersetOf(set)).toBeFalsy();
   });
 });
+
+describe("12. Set.prototype.keys", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test("1) should return iterator object.", () => {
+    expect(set.keys().next().value).toBe(1);
+  });
+});

@@ -106,3 +106,9 @@ Set.prototype.isSupersetOf() = function (other) {
 
   return true;
 };
+
+Set.prototype.keys = function* () {
+  for (const key of this) {
+    yield key;
+  }
+};
