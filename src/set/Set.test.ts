@@ -171,3 +171,16 @@ describe("12. Set.prototype.keys", () => {
     expect(set.keys().next().value).toBe(1);
   });
 });
+
+describe("13. Set.prototype.symmetricDifference", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test("1) should return new Set object containing elemets which are in either this set or the other set, but not in both.", () => {
+    const other = new Set();
+    other.add(3);
+
+    expect(set.symmetricDifference()).toBe(new Set().add(1).add(2).add(3));
+  });
+});

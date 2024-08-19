@@ -112,3 +112,21 @@ Set.prototype.keys = function* () {
     yield key;
   }
 };
+
+Set.prototype.symmetricDifference = function (other) {
+  function help(set, otherSet) {
+    const result = new Set();
+
+    for (const [_, value] of set) {
+      if (!otherSet.has(value)) {
+        result.add(value);
+      }
+    }
+
+    return result;
+  }
+
+  const set = this.size >= other.size ? this : other;
+  const otherSet = this.size < other.size ? other : this;
+  return help(set, otherSet);
+};
