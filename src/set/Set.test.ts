@@ -120,3 +120,25 @@ describe("9. Set.prototype.isDisjointFrom", () => {
     expect(set.isDisjointFrom(other)).toBeFalsy();
   });
 });
+
+describe("10. Set.prototype.isSubsetOf", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test.skip("1) should return true if this have all element in other Set.", () => {
+    const other = new Set();
+    other.add(1);
+
+    expect(set.isSubsetOf(other)).toBeTruthy();
+  });
+
+  test.skip("2) should return false if there are more elements in this than other.size.", () => {
+    const other = new Set();
+    other.add(1);
+    other.add(2);
+    other.add(3);
+
+    expect(set.isSubsetOf(other)).toBeFalsy();
+  });
+});

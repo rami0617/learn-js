@@ -82,3 +82,15 @@ Set.prototype.isDisjointFrom = function (other) {
 
   return true;
 };
+
+Set.prototype.isSubsetOf() = function (other) {
+  if (this.size > other.size) return false;
+
+  for (const [_, value] of this) {
+    if (!other.has(value)) {
+      return false;
+    }
+  }
+
+  return true;
+};
