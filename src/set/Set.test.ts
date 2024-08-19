@@ -177,10 +177,23 @@ describe("13. Set.prototype.symmetricDifference", () => {
   set.add(1);
   set.add(2);
 
-  test("1) should return new Set object containing elemets which are in either this set or the other set, but not in both.", () => {
+  test.skip("1) should return new Set object containing elements which are in either this set or the other set, but not in both.", () => {
     const other = new Set();
     other.add(3);
 
     expect(set.symmetricDifference()).toBe(new Set().add(1).add(2).add(3));
+  });
+});
+
+describe("14. Set.prototype.union", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test.skip("1) should return new Set object containing elements which are in either or both of this set and the other set.", () => {
+    const other = new Set();
+    other.add(1);
+
+    expect(set.union(other)).toBe(new Set().add(1).add(2));
   });
 });

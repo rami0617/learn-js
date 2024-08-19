@@ -130,3 +130,7 @@ Set.prototype.symmetricDifference = function (other) {
   const otherSet = this.size < other.size ? other : this;
   return help(set, otherSet);
 };
+
+Set.prototype.union = function (other) {
+  return new Set([...this, ...other]);
+};
