@@ -51,7 +51,7 @@ Set.prototype.forEach = function <T>(
   }
 };
 
-Set.prototype.has = function (value: T): boolean {
+Set.prototype.has = function <T>(value: T): boolean {
   for (const [_, setValue] of this) {
     if (value === setValue) {
       return true;
