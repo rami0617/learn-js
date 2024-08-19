@@ -142,3 +142,22 @@ describe("10. Set.prototype.isSubsetOf", () => {
     expect(set.isSubsetOf(other)).toBeFalsy();
   });
 });
+
+describe("11. Set.prototype.isSupersetOf", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test.skip("1) should return true if this have all element in this Set.", () => {
+    const other = new Set();
+    other.add(1);
+
+    expect(other.isSupersetOf(set)).toBeTruthy();
+  });
+
+  test.skip("2) should false true if there are more elements in this than this.size.", () => {
+    const other = new Set();
+
+    expect(other.isSupersetOf(set)).toBeFalsy();
+  });
+});

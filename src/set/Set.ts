@@ -94,3 +94,15 @@ Set.prototype.isSubsetOf() = function (other) {
 
   return true;
 };
+
+Set.prototype.isSupersetOf() = function (other) {
+  if (this.size < other.size) return false;
+
+  for (const [_, value] of other) {
+    if (!this.has(value)) {
+      return false;
+    }
+  }
+
+  return true;
+};
