@@ -1,6 +1,6 @@
 //discretionary create item object
 
-Set.prototype.add = function (value) {
+Set.prototype.add = function <T>(value: T) {
   if (!this.item.has(value)) {
     this.item.push(value);
   }
@@ -12,7 +12,7 @@ Set.prototype.clear = function (): void {
   this.item = [];
 };
 
-Set.prototype.delete = function (value): boolean {
+Set.prototype.delete = function <T>(value: T): boolean {
   const index = this.item.indexOf(value);
 
   if (index !== -1) {
@@ -24,8 +24,8 @@ Set.prototype.delete = function (value): boolean {
   return false;
 };
 
-Set.prototype.difference = function (other) {
-  const newSet = new Set();
+Set.prototype.difference = function <T>(other: Set<T>): Set<T> {
+  const newSet: Set<T> = new Set();
 
   for (let i = 0; i < this.length; i++) {
     if (!other.has(this[i])) {
@@ -36,14 +36,14 @@ Set.prototype.difference = function (other) {
   return newSet;
 };
 
-Set.prototype.entries = function* () {
+Set.prototype.entries = function* <T>(): IterableIterator<[T, T]> {
   for (const [_, value] of this) {
     yield [value, value];
   }
 };
 
-Set.prototype.forEach = function (
-  callbackFn: (value, key, set) => void,
+Set.prototype.forEach = function <T>(
+  callbackFn: (value: T, key: T, set: Set<T>) => void,
   thisArg?: any
 ) {
   for (const [key, value] of this) {
@@ -51,8 +51,8 @@ Set.prototype.forEach = function (
   }
 };
 
-Set.prototype.has = function (value) {
-  for (const [setKey, setValue] of this) {
+Set.prototype.has = function (value: T): boolean {
+  for (const [_, setValue] of this) {
     if (value === setValue) {
       return true;
     }
@@ -61,10 +61,10 @@ Set.prototype.has = function (value) {
   return false;
 };
 
-Set.prototype.intersection = function (other) {
-  const result = new Set();
+Set.prototype.intersection = function <T>(other: Set<T>): Set<T> {
+  const result: Set<T> = new Set();
 
-  for (const [_, value] of other) {
+  for (const value of other) {
     if (this.has(value)) {
       result.add(value);
     }
@@ -73,8 +73,8 @@ Set.prototype.intersection = function (other) {
   return result;
 };
 
-Set.prototype.isDisjointFrom = function (other) {
-  for (const [_, value] of other) {
+Set.prototype.isDisjointFrom = function <T>(other: Set<T>): boolean {
+  for (const value of other) {
     if (this.has(value)) {
       return false;
     }
@@ -83,10 +83,10 @@ Set.prototype.isDisjointFrom = function (other) {
   return true;
 };
 
-Set.prototype.isSubsetOf() = function (other) {
+Set.prototype.isSubsetOf = function <T>(other: Set<T>): boolean {
   if (this.size > other.size) return false;
 
-  for (const [_, value] of this) {
+  for (const value of this) {
     if (!other.has(value)) {
       return false;
     }
@@ -95,10 +95,10 @@ Set.prototype.isSubsetOf() = function (other) {
   return true;
 };
 
-Set.prototype.isSupersetOf() = function (other) {
+Set.prototype.isSupersetOf = function <T>(other: Set<T>): boolean {
   if (this.size < other.size) return false;
 
-  for (const [_, value] of other) {
+  for (const value of other) {
     if (!this.has(value)) {
       return false;
     }
@@ -107,17 +107,17 @@ Set.prototype.isSupersetOf() = function (other) {
   return true;
 };
 
-Set.prototype.keys = function* () {
+Set.prototype.keys = function* <T>(): IterableIterator<T> {
   for (const key of this) {
     yield key;
   }
 };
 
-Set.prototype.symmetricDifference = function (other) {
+Set.prototype.symmetricDifference = function <T>(other: Set<T>): Set<T> {
   function help(set, otherSet) {
-    const result = new Set();
+    const result: Set<T> = new Set();
 
-    for (const [_, value] of set) {
+    for (const value of set) {
       if (!otherSet.has(value)) {
         result.add(value);
       }
@@ -128,15 +128,16 @@ Set.prototype.symmetricDifference = function (other) {
 
   const set = this.size >= other.size ? this : other;
   const otherSet = this.size < other.size ? other : this;
+
   return help(set, otherSet);
 };
 
-Set.prototype.union = function (other) {
+Set.prototype.union = function <T>(other: Set<T>): Set<T> {
   return new Set([...this, ...other]);
 };
 
-Set.prototype.values = function* () {
-  for (const [_, value] of this) {
+Set.prototype.values = function* <T>(): IterableIterator<T> {
+  for (const value of this) {
     yield value;
   }
 };

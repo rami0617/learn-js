@@ -130,3 +130,24 @@ interface Map<K, V> {
   values(): IterableIterator<V>;
   set(key: K, value: V): Map<K, V>;
 }
+
+interface Set<T> {
+  add(value: T): this;
+  clear(): void;
+  delete(value: T): boolean;
+  difference(other: Set<T>): Set<T>;
+  entries(): IterableIterator<[T, T]>;
+  forEach(
+    callbackFn: (value: T, key: T, set: Set<T>) => void,
+    thisArg?: any
+  ): void;
+  has(value: T): boolean;
+  intersection(other: Set<T>): Set<T>;
+  isDisjointFrom(other: Set<T>): boolean;
+  isSubsetOf(other: Set<T>): boolean;
+  isSupersetOf(other: Set<T>): boolean;
+  keys(): IterableIterator<T>;
+  symmetricDifference(other: Set<T>): Set<T>;
+  union(other: Set<T>): Set<T>;
+  values(): IterableIterator<T>;
+}
