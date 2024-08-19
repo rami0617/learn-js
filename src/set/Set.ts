@@ -134,3 +134,9 @@ Set.prototype.symmetricDifference = function (other) {
 Set.prototype.union = function (other) {
   return new Set([...this, ...other]);
 };
+
+Set.prototype.values = function* () {
+  for (const [_, value] of this) {
+    yield value;
+  }
+};

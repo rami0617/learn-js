@@ -197,3 +197,13 @@ describe("14. Set.prototype.union", () => {
     expect(set.union(other)).toBe(new Set().add(1).add(2));
   });
 });
+
+describe("15. Set.prototype.values", () => {
+  const set = new Set();
+  set.add(1);
+  set.add(2);
+
+  test("1) should return iterator object.", () => {
+    expect(set.values().next().value).toBe(1);
+  });
+});
